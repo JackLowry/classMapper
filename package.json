@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/JackLowry/classMapper/issues"
   },
-  "homepage": "https://github.com/JackLowry/classMapper#readme"
+  "homepage": "https://github.com/JackLowry/classMapper#readme",
+  "dependencies": {
+    "socket.io": "^2.3.0"
+  }
 }

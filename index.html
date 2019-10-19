@@ -28,14 +28,25 @@
       </span>
         <p><br></p> 
     </center>
-    <div>   <!-- dont work-->
+    <div> 
       <center>
-        <input class="btn btn-primary btn btn-outline-dark rounded" type="file">                        <!-- FINPUT -->
+        <input class="btn btn-primary btn btn-outline-dark rounded" type='file' id='upload' name='ics file' accept='.ics'>
+        <button onclick='upload()' type="button" class="btn btn-success btn-block" > Submit! </button>         <!-- FINPUT -->
       </center>
     </div>        
   </body>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 <script>
+
+function upload(){
+  var input = document.querySelector('input');
+  var length = input.files.length;
+  var socket = io.connect('http://127.0.0.1:4000');
+  socket.emit('upload',{file:input});
+  console.log(length);
+
+}
 
 
 
