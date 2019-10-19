@@ -20,7 +20,7 @@
 <div class="p-4 mb-0 bg-danger text-white font-weight-bold"> Welcome to Rutgers ClassMapper! </div>   <!-- Top div. -->
 <div class="p-0 mb-0 bg-dark"></div>                                                                  <!-- stylistic stuff -->
 <div class="p-2 mb-1 bg-dark"></div>                                                                  <!-- stylistic stuff -->
-<div class="p-5 mb-2 bg-danger text-white">                                                           <!-- File input Div -->
+<div class="p-5 mb-2 bg-danger text-white" style="height: 100%;">                                     <!-- File input Div -->
   <body>
     <center>
       <span class="border border-dark rounded">
@@ -30,7 +30,7 @@
     </center>
 
     <div id = "buttonDivMain" style="float: left; border-style: dotted; width: 50%;" class="clearfix">  <!-- Fits both submit and upload buttons in one div, has border and clearfix  -->
-      <div id = "uploadButtonDiv" style="width: 25%; float: left;" >       <!-- Upload button floated left -->
+      <div id = "uploadButtonDiv" style="width: 25%; float: left;" >                                    <!-- Upload button floated left -->
         <center>
           <div class='new_Btn'>
             <button class = "btn btn-primary border border-dark rounded" type ="button">Upload your schedule (.ics file) here!</button>
@@ -38,16 +38,16 @@
           <input class="btn btn-primary" type='file' id='chatFileOpen' name='ics file' accept='.ics' style="display:none"> <!-- FILE INPUT -->
         </center>
       </div>
-      <div id = "submitButtonDiv" style="width: 25%; float: left;">        <!-- Submit button floated left to border upload button -->
+      <div id = "submitButtonDiv" style="width: 25%; float: left;">                           <!-- Submit button floated left to border upload button -->
         <button onclick='upload()' type="button" class="btn btn-primary btn-success btn-block border border-dark rounded" > Submit! </button>
       </div>
     </div>
 
-    <div id = "mapDiv">
+    <div id = "mapDiv" style="border: dotted; float: right; width: 50%; height: 25%" class="clearfix">  <!-- div for the map -->
 
     </div>
 
-    <div id = "scheduleDiv">
+    <div id = "scheduleDiv">  <!-- div for the schedule -->
 
     </div>
 
