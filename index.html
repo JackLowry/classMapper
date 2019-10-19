@@ -28,33 +28,22 @@
       </span>
         <p><br></p>
     </center>
-
-    <div id = "buttonDivMain" style="float: left; border-style: dotted; width: 50%;" class="clearfix">  <!-- Fits both submit and upload buttons in one div, has border and clearfix  -->
-      <div id = "uploadButtonDiv" style="width: 25%; float: left;" >       <!-- Upload button floated left -->
-        <center>
-          <div class='new_Btn'>
-            <button class = "btn btn-primary border border-dark rounded" type ="button">Upload your schedule (.ics file) here!</button>
-          </div>
-          <input class="btn btn-primary" type='file' id='chatFileOpen' name='ics file' accept='.ics' style="display:none"> <!-- FILE INPUT -->
-        </center>
-      </div>
-      <div id = "submitButtonDiv" style="width: 25%; float: left;">        <!-- Submit button floated left to border upload button -->
-        <button onclick='upload()' type="button" class="btn btn-primary btn-success btn-block border border-dark rounded" > Submit! </button>
-      </div>
+    <div style="width: 50%" >
+      <center>
+        <div class='new_Btn'>
+          <button class = "btn btn-primary" type ="button">Upload your .ics file here </button><br>
+        </div>
+        <input class="btn btn-primary" type='file' id='chatFileOpen' name='ics file' accept='.ics' style="display:none"> <!-- FILE INPUT -->
+      </center>
     </div>
-
-    <div id = "mapDiv">
-
+    <div>
+      <button onclick='upload()' type="button" class="btn btn-primary btn-success btn-block" > Submit! </button>
     </div>
-
-    <div id = "scheduleDiv">
-
-    </div>
-
   </body>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 <script>
+
 $('.new_Btn').on("click" , function () {
     $('#chatFileOpen').click();
 });
