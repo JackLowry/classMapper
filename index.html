@@ -42,7 +42,7 @@
     </center>
     -->
     <div id='leftDiv' style='width:30%;float:left'>    <!-- Master left side div -->
-    <div id = "buttonDivMain" style="float: left; width: 100%;" class="clearfix">  <!-- Fits both submit and upload buttons in one div, has border and clearfix  -->
+    <div id = "buttonDivMain" style="padding:7px;float: left; width: 100%;" class="clearfix">  <!-- Fits both submit and upload buttons in one div, has border and clearfix  -->
       <div id = "uploadButtonDiv" style="width: 25%; float: left;" >                                    <!-- Upload button floated left -->
         <center>
           <div class='new_Btn' style="float:left; width: 100%">
@@ -140,14 +140,21 @@ $('.new_Btn').on("click" , function () {
 });
 var socket = io.connect('http://127.0.0.1:4000');
 function upload(){
-  
+
   var length = input.files.length;
 
   socket.emit('upload',{file:input});
   console.log(length);
 }
 socket.on("polyline",function(data){
-  console.log(data.polyline);
+  var line1 = new google.maps.Polyline({
+    path: data.line,
+    strokeColor: '#FF0000',
+	  strokeOpacity: 1.0,
+	  strokeWeight: 2
+  });
+  line1.setMap(map);
+  console.log(data.line);
 });
 
 
