@@ -41,8 +41,8 @@
         <p><br></p>
     </center>
     -->
-    <div id='leftDiv' style='width:30%;float:left'>
-    <div id = "buttonDivMain" style="float: left; border-style: dotted; width: 100%;" class="clearfix">  <!-- Fits both submit and upload buttons in one div, has border and clearfix  -->
+    <div id='leftDiv' style='width:30%;float:left'>    <!-- Master left side div -->
+    <div id = "buttonDivMain" style="float: left; width: 100%;" class="clearfix">  <!-- Fits both submit and upload buttons in one div, has border and clearfix  -->
       <div id = "uploadButtonDiv" style="width: 25%; float: left;" >                                    <!-- Upload button floated left -->
         <center>
           <div class='new_Btn' style="float:left; width: 100%">
@@ -51,8 +51,8 @@
           <input class="btn btn-primary" type='file' id='chatFileOpen' name='ics file' accept='.ics' style="display:none"> <!-- FILE INPUT -->
         </center>
       </div>
-      <div id = "submitButtonDiv" style="width: 25%; float: right;">                           <!-- Submit button floated left to border upload button -->
-        <button onclick='upload()' type="button" class="btn btn-primary btn-success btn-block border border-dark rounded" > Submit! </button>
+      <div id = "submitButtonDiv" style="width: 25%; float: right;">               <!-- Submit button floated left to border upload button -->
+        <button id = "submitButtonBUTTON" onclick='upload()' type="button" class="btn btn-primary btn-success btn-block border border-dark rounded"> Submit! </button>  <!-- submit button. INITIALIZED IN JS BELOW -->
       </div>
     </div>
 
@@ -108,6 +108,10 @@
             var line = "y~ivFtzmeMZaAf@wAcDmFM]EMMMh@gCd@mC@SA}@s@_Im@eHO{AMaB@]Ae@@k@LaA`A}E~@cE|A{HrAkGf@_DpAeK\\_Bd@cB`@}@\\YP?JEHMDQ?Q?GVoB`BsDpC}FBIc@c@w@u@YWKAcAaAgAeAE@OVIWCCSO?IfAaCo@k@}@u@EKAKVeANDP?LITa@F";
 
             }
+
+            // Script to hide submit button:
+            //document.getElementById("submitButtonDiv").style.disabled;
+
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9FCsoZWld-8JgJwwz6H4GvM-JtYBDSfY&callback=initMap"
         async defer></script>
@@ -118,12 +122,25 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 <script>
+
+document.getElementById("submitButtonBUTTON").disabled = true;  // initialize button to diabled
+
+var input = document.querySelector('input');
+input.addEventListener('change', updateSubmitButton);  // looks for change in upload value of upload button
+
+function updateSubmitButton(){
+
+  // function to reenale submit button after someone actually uploads file onto cache.
+  document.getElementById("submitButtonBUTTON").disabled = false;
+
+}
+
 $('.new_Btn').on("click" , function () {
     $('#chatFileOpen').click();
 });
 var socket = io.connect('http://127.0.0.1:4000');
 function upload(){
-  var input = document.querySelector('input');
+  
   var length = input.files.length;
 
   socket.emit('upload',{file:input});
