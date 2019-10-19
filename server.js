@@ -4,6 +4,7 @@ const uuidv1 = require('uuid/v1');
 const fs = require('fs');
 client.on('connection', function(socket){
     socket.on("upload", function(data){
+      console.log("upload recieved")
       //data.file
 
       uuid = uuidv1();
@@ -25,9 +26,22 @@ client.on('connection', function(socket){
         mapper.on('close', (code) => {
            console.log(`child process exited with code ${code}`);
 
-           if(data in schedule) {
-             schedule[data].push()
-           }
+           fs.readFile('tmp/' + uuid + '_response', (err, data) => {
+             if(err) throw err;
+
+             lines = data.toString().split("\n")
+             for(i = 0; i < lines.length; i++) {
+               if(lines[i] in schedule) {
+                 day = lines[i];
+                 while(!(lines[i+1] in schedule) && (i+1 < lines.length) && lines[i+1]){
+                   i++;
+                   schedule[day].push(lines[i])
+                 }
+               }
+             }
+
+             console.log(schedule)
+           })
         });
 
       });

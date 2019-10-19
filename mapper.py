@@ -126,7 +126,7 @@ write_file = open(cal_file + "_response", "w+")
 
 for day in schedule:
     schedule[day][0].find_position()
-    write_file.write(day)
+    write_file.write(f"{day}\n")
     for i in range(1,len(schedule[day])):
         class1 = schedule[day][i-1]
         class2 = schedule[day][i]
@@ -142,6 +142,7 @@ for day in schedule:
                     f"key={api_key}")
         #print(api_call)
         response = requests.get(api_call)
-        write_file.write(json.dumps(response.json()))
+        output = json.dumps(response.json()["routes"][0]["overview_polyline"]["points"])
+        write_file.write(f"{output}\n")
 
-os.remove(cal_file)
+#os.remove(cal_file)
