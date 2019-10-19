@@ -56,8 +56,44 @@
       </div>
     </div>
 
-    <div style='float:left'>
-      schedule stuff
+    <div id='schedule' style='float:left;width:100%;padding:7px'>
+
+        <style>
+          table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+          }
+          th, td {
+            padding: 10px;
+          }
+          th {
+            text-align: center;
+          }
+        </style>
+
+        <table id='table' style="width:100%">
+          <tr>
+            <th>Day</th>
+            <th>Classes</th>
+
+          </tr>
+          <tr>
+            <td>Monday</td>
+            <td>omg so many classes look how many classes I have ohhh man it keeps going WOAH</td>
+
+          </tr>
+          <tr>
+            <td>Tuesday</td>
+            <td>yeet</td>
+
+          </tr>
+          <tr>
+            <td>Wednesday</td>
+            <td>uh huh</td>
+
+          </tr>
+        </table>
+
     </div>
   </div>
 
@@ -69,22 +105,8 @@
               center: {lat: 40.504746, lng: -74.451802}, //40.504746, -74.451802
               zoom: 14
               });
-              var roadTripCoordinates = [
-        				{lat:40.759011,lng:-73.984472},
-        				{lat:40.916765,lng:-74.171811},
-        				{lat:41.320043,lng:-73.979287},
-        				{lat:41.503427,lng:-74.010418},
-        				{lat:40.4406,lng:-79.9959},
-        				{lat:41.878114,lng:-87.629798},
-        				{lat:41.515776,lng:-88.089981},
-        				{lat:41.603121,lng:-93.615418},
-        				{lat:41.614432,lng:-94.017453},
-        				{lat:41.506006,lng:-94.318428},
-        				{lat:41.264905,lng:-95.995216},
-        				{lat:40.922593,lng:-98.342114},
-        				{lat:41.134193,lng:-104.816437},
-        				{lat:39.755373,lng:-104.984837}
-        			  ];
+            var line = "y~ivFtzmeMZaAf@wAcDmFM]EMMMh@gCd@mC@SA}@s@_Im@eHO{AMaB@]Ae@@k@LaA`A}E~@cE|A{HrAkGf@_DpAeK\\_Bd@cB`@}@\\YP?JEHMDQ?Q?GVoB`BsDpC}FBIc@c@w@u@YWKAcAaAgAeAE@OVIWCCSO?IfAaCo@k@}@u@EKAKVeANDP?LITa@F";
+
             }
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9FCsoZWld-8JgJwwz6H4GvM-JtYBDSfY&callback=initMap"
@@ -92,26 +114,25 @@
 
     </div>
 
-    <div id = "scheduleDiv">  <!-- div for the schedule -->
-
-    </div>
-
   </body>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 <script>
-
 $('.new_Btn').on("click" , function () {
     $('#chatFileOpen').click();
 });
+var socket = io.connect('http://127.0.0.1:4000');
 function upload(){
   var input = document.querySelector('input');
   var length = input.files.length;
-  var socket = io.connect('http://127.0.0.1:4000');
+
   socket.emit('upload',{file:input});
   console.log(length);
-
 }
+socket.on("polyline",function(data){
+  console.log(data.polyline);
+});
+
 
 
 
