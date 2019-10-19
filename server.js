@@ -2,6 +2,7 @@ const http = require("http");
 const client = require('socket.io').listen(4000).sockets;
 const uuidv1 = require('uuid/v1');
 const fs = require('fs');
+const decodePolyline = require('decode-google-map-poyline');
 client.on('connection', function(socket){
     socket.on("upload", function(data){
       console.log("upload recieved")
@@ -47,4 +48,8 @@ client.on('connection', function(socket){
       });
 
   });
+    socket.emit("polyline",{line:decodePolyline(polyline)});
+    console.log(decodePolyline(polyline));
+
 });
+var polyline = 'y~ivFtzmeMZaAf@wAcDmFM]EMMMh@gCd@mC@SA}@s@_Im@eHO{AMaB@]Ae@@k@LaA`A}E~@cE|A{HrAkGf@_DpAeK\\_Bd@cB`@}@\\YP?JEHMDQ?Q?GVoB`BsDpC}FBIc@c@w@u@YWKAcAaAgAeAE@OVIWCCSO?IfAaCo@k@}@u@EKAKVeANDP?LITa@F';
