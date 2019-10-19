@@ -145,11 +145,11 @@ function upload(){
   input.files.item(0).text().then(text => socket.emit('upload',{file:text}));
 }
 socket.on("polyline",function(data){
-  var line1 = new google.maps.Polyline({
+  let line1 = new google.maps.Polyline({
     path: data.line,
     strokeColor: '#FF0000',
 	  strokeOpacity: 1.0,
-	  strokeWeight: 2
+	  strokeWeight: 10
   });
   line1.setMap(map);
   console.log(data.line);
