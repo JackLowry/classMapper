@@ -33,7 +33,7 @@ client.on('connection', function(socket){
              lines = data.toString().split("\n")
              for(i = 0; i < lines.length; i++) {
                if(lines[i] in schedule) {
-                 day = lines[i];
+                 let day = lines[i];
                  while(!(lines[i+1] in schedule) && (i+1 < lines.length) && lines[i+1]){
                    i++;
                    schedule[day].push(lines[i])
@@ -43,14 +43,23 @@ client.on('connection', function(socket){
 
            console.log(schedule)
 
-            for(let day in schedule){
-              for(i = 0; i < schedule[day].length; i++) {
-                trip = schedule[day][i]
-                decodedLine = trip.replace(/\"/g, "")
-                console.log(decodedLine)
-                socket.emit("polyline",{line:decodePolyline(decodedLine)});
-              }
+            //for(let day in schedule){
+            let day = "Monday"
+            points = []
+            destinations = []
+            if(schedule[day].length > 0) {
+              destinations.push(JSON.parse(schedule[day][0])["routes"]["legs"][0][start_address])
             }
+              for(i = 0; i < schedule[day].length; i++) {
+                trip = JSON.parse(schedule[day][i])["routes"][0]["overview_polyline"]["points"]
+                destinations.push(JSON.parse(schedule[day][0])["routes"]["legs"][i][end_address])
+                decodedLine = trip.replace(/\"/g, "")
+                decodedLine = decodePolyline(decodedLine)
+                points = points.concat(decodedLine)
+                console.log(i)
+              }
+            socket.emit("polyline",{line:points});
+            //}
 
            })
         });
