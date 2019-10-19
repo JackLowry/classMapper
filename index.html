@@ -146,7 +146,7 @@ function upload(){
 }
 
 socket.on("polyline",function(data){
-  var line1 = new google.maps.Polyline({
+  let line1 = new google.maps.Polyline({
     path: data.line,
     strokeColor: '#FF0000',
 	  strokeOpacity: 1.0,
