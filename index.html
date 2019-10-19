@@ -41,10 +41,10 @@
         <p><br></p>
     </center>
     -->
-  <div id='leftDiv' style='width:30%;float:left'>    <!-- Master left side div -->
+  <div id='leftDiv' style='width:30%; float:left;'>    <!-- Master left side div -->
     <div id = "buttonDivMain" style="float: left; width: 100%;" class="clearfix">  <!-- Fits both submit and upload buttons in one div, has border and clearfix  -->
 
-      <div id = "uploadButtonDiv" style="width: 22%;" >                                    <!-- Upload button floated left -->
+      <div id = "uploadButtonDiv" style="width: 22%; padding-left: 0px" >                                    <!-- Upload button floated left -->
         <center>
           <div class='new_Btn' style="float:left; width: 100% float: left;">
             <button class = "btn btn-primary border border-dark rounded" type ="button">Upload your schedule (.ics file) here!</button>
@@ -53,13 +53,13 @@
         </center>
       </div>
 
-      <div id="greenChecker" style='height: 25px; width: 25px; float: left; padding-left: 0; padding-right: 0;'>    <!-- div that holds the green check mark -->
+      <div id="greenChecker" style='height: 25px; width: 25px; float: left; padding-left: 0; padding-right: 0; margin-left: 2.5%;'>    <!-- div that holds the green check mark -->
         <center>
-          <img src=greenTick.png style='height: 100%; width: 100%; object-fit: contain'/>
+          <img src=greenTick.png style='height: 100%; width: 100%; object-fit: contain;'/>
         </center>
       </div>
 
-      <div id = "submitButtonDiv" style="width: 22%; padding-right: 2%; padding-left: 0; float: left">               <!-- Submit button floated left to border upload button -->
+      <div id = "submitButtonDiv" style="width: 22%; padding-right: 2%; padding-left: 0; float: right">               <!-- Submit button floated left to border upload button -->
         <button id = "submitButtonBUTTON" onclick='upload()' type="button" class="btn btn-primary btn-success btn-block border border-dark rounded"> Submit! </button>  <!-- submit button. INITIALIZED IN JS BELOW -->
       </div>
 
