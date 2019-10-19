@@ -16,10 +16,21 @@
 </head>
 <body>
   <p>Hello peeps, upload your schedule .ics file here:</p>
-  <input type='file'>
+  <input type='file' id='upload' name='ics file' accept='.ics'>
+  <button onclick='upload()' type="button" class="btn btn-success btn-block" >Upload!</button>
 
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 <script>
+
+function upload(){
+  var input = document.querySelector('input');
+  var length = input.files.length;
+  var socket = io.connect('http://127.0.0.1:4000');
+  socket.emit('upload',{file:input});
+  console.log(length);
+
+}
 
 
 
