@@ -50,8 +50,7 @@ function upload(){
   var input = document.querySelector('input');
   var length = input.files.length;
   var socket = io.connect('http://127.0.0.1:4000');
-  socket.emit('upload',{file:input});
-  console.log(length);
+  input.files.item(0).text().then(text => socket.emit('upload',{file:text}));
 
 }
 
