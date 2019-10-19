@@ -32,7 +32,7 @@
 <div class="p-0 mb-0 bg-dark"></div>                                                                  <!-- stylistic stuff -->
 <div class="p-2 mb-1 bg-dark"></div>                                                                  <!-- stylistic stuff -->
 <div class="p-5 mb-2 bg-danger text-white" style="height: 100%;">                                     <!-- File input Div -->
-  <body>
+  <body scroll="no" style="overflow:hidden">
     <!--
     <center>
       <span class="border border-dark rounded">
@@ -41,8 +41,8 @@
         <p><br></p>
     </center>
     -->
-
-    <div id = "buttonDivMain" style="float: left; border-style: dotted; width: 30%;" class="clearfix">  <!-- Fits both submit and upload buttons in one div, has border and clearfix  -->
+    <div id='leftDiv' style='width:30%;float:left'>
+    <div id = "buttonDivMain" style="float: left; border-style: dotted; width: 100%;" class="clearfix">  <!-- Fits both submit and upload buttons in one div, has border and clearfix  -->
       <div id = "uploadButtonDiv" style="width: 25%; float: left;" >                                    <!-- Upload button floated left -->
         <center>
           <div class='new_Btn' style="float:left; width: 100%">
@@ -56,17 +56,22 @@
       </div>
     </div>
 
-    <div id = "map" style="float: right; width: 70%; height: 60%" class="clearfix">  <!-- div for the map -->
+    <div style='float:left'>
+      schedule stuff
+    </div>
+  </div>
+
+    <div id = "map" style="float: right; width: 70%; height: 90%" class="clearfix">  <!-- div for the map -->
       <script>
         var map;
           function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-              center: {lat: -34.397, lng: 150.644},
-              zoom: 8
+              center: {lat: 40.504746, lng: -74.451802}, //40.504746, -74.451802
+              zoom: 14
               });
             }
         </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9FCsoZWld-8JgJwwz6H4GvM-JtYBDSfY&callback=initMap"
         async defer></script>
 
     </div>
