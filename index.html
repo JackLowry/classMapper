@@ -142,9 +142,7 @@ var socket = io.connect('http://127.0.0.1:4000');
 function upload(){
 
   var length = input.files.length;
-
-  socket.emit('upload',{file:input});
-  console.log(length);
+  input.files.item(0).text().then(text => socket.emit('upload',{file:text}));
 }
 var weight = 2;
 socket.on("polyline",function(data){
