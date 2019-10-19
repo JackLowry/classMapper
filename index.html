@@ -12,6 +12,17 @@
 
     <title>Index</title>
     <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+          height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
     </style>
 </head>
 
@@ -20,29 +31,76 @@
 <div class="p-4 mb-0 bg-danger text-white font-weight-bold"> Welcome to Rutgers ClassMapper! </div>   <!-- Top div. -->
 <div class="p-0 mb-0 bg-dark"></div>                                                                  <!-- stylistic stuff -->
 <div class="p-2 mb-1 bg-dark"></div>                                                                  <!-- stylistic stuff -->
-<div class="p-5 mb-2 bg-danger text-white">                                                           <!-- File input Div -->
-  <body>
+<div class="p-5 mb-2 bg-danger text-white" style="height: 100%;">                                     <!-- File input Div -->
+  <body scroll="no" style="overflow:hidden">
+    <!--
     <center>
       <span class="border border-dark rounded">
         <p class="text-light d-inline p-4 bg-red text-dark">Upload your schedule (.ics file) here:</p>
       </span>
         <p><br></p>
     </center>
-    <div style="width: 50%" >
-      <center>
-        <div class='new_Btn'>
-          <button class = "btn btn-primary" type ="button">Upload your .ics file here </button><br>
-        </div>
-        <input class="btn btn-primary" type='file' id='chatFileOpen' name='ics file' accept='.ics' style="display:none"> <!-- FILE INPUT -->
-      </center>
+    -->
+    <div id='leftDiv' style='width:30%;float:left'>
+    <div id = "buttonDivMain" style="float: left; border-style: dotted; width: 100%;" class="clearfix">  <!-- Fits both submit and upload buttons in one div, has border and clearfix  -->
+      <div id = "uploadButtonDiv" style="width: 25%; float: left;" >                                    <!-- Upload button floated left -->
+        <center>
+          <div class='new_Btn' style="float:left; width: 100%">
+            <button class = "btn btn-primary border border-dark rounded" type ="button">Upload your schedule (.ics file) here!</button>
+          </div>
+          <input class="btn btn-primary" type='file' id='chatFileOpen' name='ics file' accept='.ics' style="display:none"> <!-- FILE INPUT -->
+        </center>
+      </div>
+      <div id = "submitButtonDiv" style="width: 25%; float: right;">                           <!-- Submit button floated left to border upload button -->
+        <button onclick='upload()' type="button" class="btn btn-primary btn-success btn-block border border-dark rounded" > Submit! </button>
+      </div>
     </div>
-    <div>
-      <button onclick='upload()' type="button" class="btn btn-primary btn-success btn-block" > Submit! </button>
+
+    <div style='float:left'>
+      schedule stuff
     </div>
+  </div>
+
+    <div id = "map" style="float: right; width: 70%; height: 90%" class="clearfix">  <!-- div for the map -->
+      <script>
+        var map;
+          function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+              center: {lat: 40.504746, lng: -74.451802}, //40.504746, -74.451802
+              zoom: 14
+              });
+              var roadTripCoordinates = [
+        				{lat:40.759011,lng:-73.984472},
+        				{lat:40.916765,lng:-74.171811},
+        				{lat:41.320043,lng:-73.979287},
+        				{lat:41.503427,lng:-74.010418},
+        				{lat:40.4406,lng:-79.9959},
+        				{lat:41.878114,lng:-87.629798},
+        				{lat:41.515776,lng:-88.089981},
+        				{lat:41.603121,lng:-93.615418},
+        				{lat:41.614432,lng:-94.017453},
+        				{lat:41.506006,lng:-94.318428},
+        				{lat:41.264905,lng:-95.995216},
+        				{lat:40.922593,lng:-98.342114},
+        				{lat:41.134193,lng:-104.816437},
+        				{lat:39.755373,lng:-104.984837}
+        			  ];
+            }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9FCsoZWld-8JgJwwz6H4GvM-JtYBDSfY&callback=initMap"
+        async defer></script>
+
+    </div>
+
+    <div id = "scheduleDiv">  <!-- div for the schedule -->
+
+    </div>
+
   </body>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 <script>
+
 $('.new_Btn').on("click" , function () {
     $('#chatFileOpen').click();
 });
