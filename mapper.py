@@ -142,7 +142,7 @@ for day in schedule:
                     f"key={api_key}")
         #print(api_call)
         response = requests.get(api_call)
-        output = json.dumps(response.json()["routes"][0]["overview_polyline"]["points"])
+        output = json.dumps(response.json())
         write_file.write(f"{output}\n")
 
 #os.remove(cal_file)
