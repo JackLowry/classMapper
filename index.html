@@ -146,16 +146,17 @@ function upload(){
   socket.emit('upload',{file:input});
   console.log(length);
 }
+var weight = 2;
 socket.on("polyline",function(data){
   var line1 = new google.maps.Polyline({
     path: data.line,
     strokeColor: '#FF0000',
 	  strokeOpacity: 1.0,
-	  strokeWeight: 2
+	  strokeWeight: weight
   });
   line1.setMap(map);
-  console.log(data.line);
 });
+
 
 
 
