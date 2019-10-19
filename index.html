@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-                                                                                                   <!-- importing bootstrap && other stuffs --> 
+                                                                                                   <!-- importing bootstrap && other stuffs -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -26,24 +26,26 @@
       <span class="border border-dark rounded">
         <p class="text-light d-inline p-4 bg-red text-dark">Upload your schedule (.ics file) here:</p>
       </span>
-        <p><br></p> 
+        <p><br></p>
     </center>
     <div style="width: 50%" >
       <center>
-        <div class ="newBtn">
-          <button class = "btn btn-primary" style = "border-radius:4px 0 0 4px;" type = "button"> </button><br>
+        <div class='new_Btn'>
+          <button class = "btn btn-primary" type ="button">Upload your .ics file here </button><br>
         </div>
-        <input class="btn btn-primary btn btn-outline-dark rounded" type='file' id='upload' name='ics file' accept='.ics' style="display:none"> <!-- FILE INPUT -->
+        <input class="btn btn-primary" type='file' id='chatFileOpen' name='ics file' accept='.ics' style="display:none"> <!-- FILE INPUT -->
       </center>
     </div>
     <div>
       <button onclick='upload()' type="button" class="btn btn-primary btn-success btn-block" > Submit! </button>
-    </div>      
+    </div>
   </body>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 <script>
-
+$('.new_Btn').on("click" , function () {
+    $('#chatFileOpen').click();
+});
 function upload(){
   var input = document.querySelector('input');
   var length = input.files.length;
