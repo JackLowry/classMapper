@@ -41,24 +41,32 @@
         <p><br></p>
     </center>
     -->
-    <div id='leftDiv' style='width:30%;float:left'>    <!-- Master left side div -->
+  <div id='leftDiv' style='width:30%;float:left'>    <!-- Master left side div -->
     <div id = "buttonDivMain" style="float: left; width: 100%;" class="clearfix">  <!-- Fits both submit and upload buttons in one div, has border and clearfix  -->
-      <div id = "uploadButtonDiv" style="width: 25%; float: left;" >                                    <!-- Upload button floated left -->
+
+      <div id = "uploadButtonDiv" style="width: 22%;" >                                    <!-- Upload button floated left -->
         <center>
-          <div class='new_Btn' style="float:left; width: 100%">
+          <div class='new_Btn' style="float:left; width: 100% float: left;">
             <button class = "btn btn-primary border border-dark rounded" type ="button">Upload your schedule (.ics file) here!</button>
           </div>
           <input class="btn btn-primary" type='file' id='chatFileOpen' name='ics file' accept='.ics' style="display:none"> <!-- FILE INPUT -->
         </center>
       </div>
-      <div id = "submitButtonDiv" style="width: 25%; float: right;">               <!-- Submit button floated left to border upload button -->
+
+      <div id="greenChecker" style='height: 25px; width: 25px; float: left; padding-left: 0; padding-right: 0;'>    <!-- div that holds the green check mark -->
+        <center>
+          <img src=greenTick.png style='height: 100%; width: 100%; object-fit: contain'/>
+        </center>
+      </div>
+
+      <div id = "submitButtonDiv" style="width: 22%; padding-right: 2%; padding-left: 0; float: left">               <!-- Submit button floated left to border upload button -->
         <button id = "submitButtonBUTTON" onclick='upload()' type="button" class="btn btn-primary btn-success btn-block border border-dark rounded"> Submit! </button>  <!-- submit button. INITIALIZED IN JS BELOW -->
       </div>
+
     </div>
 
-    <div style='float:left'> 
-      schedule stuff
-    </div>
+
+
   </div>
 
     <div id = "map" style="float: right; width: 70%; height: 90%" class="clearfix">  <!-- div for the map -->
@@ -96,16 +104,13 @@
 
     </div>
 
-    <div id = "scheduleDiv">  <!-- div for the schedule -->
-
-    </div>
-
   </body>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 <script>
 
 document.getElementById("submitButtonBUTTON").disabled = true;  // initialize button to diabled
+document.getElementById("greenChecker").style.opacity = '0.0'; // initialize green check to 'hidden' state
 
 var input = document.querySelector('input');
 input.addEventListener('change', updateSubmitButton);  // looks for change in upload value of upload button
@@ -114,7 +119,7 @@ function updateSubmitButton(){
 
   // function to reenale submit button after someone actually uploads file onto cache.
   document.getElementById("submitButtonBUTTON").disabled = false;
-
+  document.getElementById("greenChecker").style.opacity = '1.0';
 }
 
 $('.new_Btn').on("click" , function () {
