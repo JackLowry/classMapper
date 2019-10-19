@@ -48,17 +48,19 @@ client.on('connection', function(socket){
             points = []
             destinations = []
             if(schedule[day].length > 0) {
-              destinations.push(JSON.parse(schedule[day][0])["routes"]["legs"][0][start_address])
+              route = JSON.parse(schedule[day][0])["routes"][0]["legs"][0]
+              destinations.push({"location":route["start_location"], "address":route["start_address"]})
             }
               for(i = 0; i < schedule[day].length; i++) {
-                trip = JSON.parse(schedule[day][i])["routes"][0]["overview_polyline"]["points"]
-                destinations.push(JSON.parse(schedule[day][0])["routes"]["legs"][i][end_address])
-                decodedLine = trip.replace(/\"/g, "")
+                route = JSON.parse(schedule[day][0])["routes"][0]
+                routeLine = route["overview_polyline"]["points"]
+                destinations.push({"location":route["legs"][0]["end_location"], "address":route["legs"][0]["end_address"]})
+                decodedLine = routeLine.replace(/\"/g, "")
                 decodedLine = decodePolyline(decodedLine)
                 points = points.concat(decodedLine)
                 console.log(i)
               }
-            socket.emit("polyline",{line:points});
+            socket.emit("polyline",{line:points, destinations:destinations});
             //}
 
            })

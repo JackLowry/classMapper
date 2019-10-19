@@ -162,6 +162,25 @@ socket.on("polyline",function(data){
 	  strokeOpacity: 1.0,
 	  strokeWeight: 2
   });
+
+  for(i = 0; i < data.destinations.length; i++) {
+    let marker = new google.maps.Marker({
+      position: data.destinations[i]["location"],
+      title: data.destinations[i]["address"],
+      map: map,
+      clickable: true
+    });
+
+    let infoWindow = new google.maps.InfoWindow({
+      position: marker.getPosition(),
+      content: data.destinations[i]["address"]
+    });
+
+    marker.addListener('click', function() {
+       infoWindow.open(map, marker)
+    })
+  }
+
   line1.setMap(map);
   //map.addPolyline(line1);
 });
