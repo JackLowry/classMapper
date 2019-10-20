@@ -124,8 +124,31 @@
 
     </div>
   </div>
-    
-    <div id = "map" style="float: right; width: 70%; height: 90%" class="clearfix">  <!-- div for the map -->
+<style>
+.tab {
+  color: white;
+  float:left;
+  background-color: gray;
+  text-align: center;
+  width:19.8%;
+  margin:.1%;
+  cursor: pointer;
+}
+</style>
+
+
+    <div style='float:right;width:70%;height:90%'>
+      <div id='tabs'style="height:5%">
+        <div id='mon'class='tab' >Monday</div>
+        <div class='tab' >Tuesday</div>
+        <div class='tab' >Wednesday</div>
+        <div class='tab' >Thursday</div>
+        <div class='tab' >Friday</div>
+
+
+
+      </div>
+    <div id = "map" style="" class="clearfix">  <!-- div for the map -->
       <script>
         var map;
           function initMap() {
@@ -145,12 +168,15 @@
         async defer></script>
 
     </div>
-
+  </div>
   </body>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 <script>
 
+function mon(){
+  document.getElementById(mon).backgroundColor='black';
+}
 document.getElementById("submitButtonBUTTON").disabled = true;  // initialize button to diabled
 document.getElementById("greenChecker").style.opacity = '0.0'; // initialize green check to 'hidden' state
 
