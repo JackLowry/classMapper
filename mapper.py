@@ -276,4 +276,4 @@ for day in schedule:
 print(json.dumps(schedule_dict))
 
 write_file.write("SCHEDULE_DONE\n" + json.dumps(schedule_dict))
-#os.remove(cal_file)
+os.remove(cal_file)
