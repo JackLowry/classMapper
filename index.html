@@ -65,13 +65,13 @@
       <!--<input type="text" id='addressSearch'class="form-control" placeholder="Address" aria-label="Address">-->
       <div id = "uploadAddress" style="width: 60%; padding-left: 0px">
         <center>
-          <input type="text" id='addressSearch'class="form-control btn-outline-muted" placeholder="Address" aria-label="Address" style="float:left; width: 100%; float: left; margin-bottom: 1%;">
+          <input type="text" id='addressSearch'class="form-control" placeholder="Address" aria-label="Address" style="float:left; width: 100%; float: left; margin-bottom: 2%;">
         </center>
       </div>
       <div id = "uploadButtonDiv" style="width: 22%; padding-left: 0px" >                                    <!-- Upload button floated left -->
         <center>
           <div class='new_Btn' style="float:left; width: 100%; float: left;">
-            <button class = "btn btn-outline-dark" type ="button">Upload your schedule (.ics file) here!</button>
+            <button class = "btn btn-dark" type ="button">Upload your schedule (.ics file) here!</button>
           </div>
           <input class="btn btn-primary" type='file' id='chatFileOpen' name='ics file' accept='.ics' style="display:none"> <!-- FILE INPUT -->
         </center>
@@ -302,6 +302,7 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
   for(i = 0; i < monArray.length; i++){
     agenda = agenda + JSON.stringify(monArray[i].name)+" at "+JSON.stringify(monArray[i].acronym)+" ("+JSON.stringify(monArray[i].loc_name)+")"+" starting at "+JSON.stringify(monArray[i].startTime)+" and ending at "+JSON.stringify(monArray[i].endTime)+"\n";
 
+    agenda = agenda.replace("\"", " ");
     //classElement = monArray[i];
     //agenda = agenda + JSON.stringify(classElement) + "<br>";
   }
@@ -309,32 +310,44 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
   document.getElementById("monDesc").textContent = agenda;
 
   for(i = 0; i < tueArray.length; i++){
-    classElement = tueArray[i];
-    agenda = agenda + String(classElement) + "<br>";
+    agenda = agenda + JSON.stringify(tueArray[i].name)+" at "+JSON.stringify(tueArray[i].acronym)+" ("+JSON.stringify(tueArray[i].loc_name)+")"+" starting at "+JSON.stringify(tueArray[i].startTime)+" and ending at "+JSON.stringify(tueArray[i].endTime)+"\n";
+
+    agenda = agenda.replace("\"", " ");
   }
 
   document.getElementById("tueDesc").textContent = agenda;
 
+  agenda = "";
+
   for(i = 0; i < wedArray.length; i++){
-    classElement = wedArray[i];
-    agenda = agenda + String(classElement) + "<br>";
+    agenda = agenda + JSON.stringify(wedArray[i].name)+" at "+JSON.stringify(wedArray[i].acronym)+" ("+JSON.stringify(wedArray[i].loc_name)+")"+" starting at "+JSON.stringify(wedArray[i].startTime)+" and ending at "+JSON.stringify(wedArray[i].endTime)+"\n";
+
+    agenda = agenda.replace("\"", " ");
   }
 
   document.getElementById("wedDesc").textContent = agenda;
 
+  agenda = "";
+
   for(i = 0; i < thuArray.length; i++){
-    classElement = thuArray[i];
-    agenda = agenda + String(classElement) + "<br>";
+    agenda = agenda + JSON.stringify(thuArray[i].name)+" at "+JSON.stringify(thuArray[i].acronym)+" ("+JSON.stringify(thuArray[i].loc_name)+")"+" starting at "+JSON.stringify(thuArray[i].startTime)+" and ending at "+JSON.stringify(thuArray[i].endTime)+"\n";
+
+    agenda = agenda.replace("\"", " ");
   }
 
   document.getElementById("thuDesc").textContent = agenda;
 
+  agenda = "";
+
   for(i = 0; i < friArray.length; i++){
-    classElement = friArray[i];
-    agenda = agenda + String(classElement) + "<br>";
+    agenda = agenda + JSON.stringify(friArray[i].name)+" at "+JSON.stringify(friArray[i].acronym)+" ("+JSON.stringify(friArray[i].loc_name)+")"+" starting at "+JSON.stringify(friArray[i].startTime)+" and ending at "+JSON.stringify(friArray[i].endTime)+"\n";
+
+    agenda = agenda.replace("\"", " ");
   }
 
   document.getElementById("friDesc").textContent = agenda;
+
+  agenda = "";
 
 }
 //var input = document.getElementById('addressSearch');
