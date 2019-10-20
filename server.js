@@ -44,6 +44,7 @@ client.on('connection', function(socket){
                    i++;
                    schedule[day].push(lines[i])
                  }
+                 console.log("" + day + " length: " + schedule[day].length)
                }
              }
 
@@ -56,22 +57,27 @@ client.on('connection', function(socket){
             //for(let day in schedule){
           function getDayRoute(day)
           {
-            console.log(day);
+            //console.log(day);
             points = []
             destinations = []
             //console.log(schedule);
             if(schedule[day].length > 0) {
-              route = JSON.parse(schedule[day][0])["routes"][0]["legs"][0]
-              destinations.push({"location":route["start_location"], "address":route["start_address"]})
+              route = JSON.parse(schedule[day][0])["routes"][0]
+              destinations.push({"location":route["legs"][0]["start_location"], "address":route["legs"][0]["start_address"]})
+              routeLine = route["overview_polyline"]["points"]
+              decodedLine = routeLine.replace(/\"/g, "")
+              decodedLine = decodePolyline(decodedLine)
+              points = points.concat(decodedLine)
+              console.log("points length:" + points.length + "\n")
             }
               for(i = 1; i < schedule[day].length; i++) {
-                route = JSON.parse(schedule[day][0])["routes"][0]
+                route = JSON.parse(schedule[day][i])["routes"][ 0]
                 routeLine = route["overview_polyline"]["points"]
                 destinations.push({"location":route["legs"][0]["end_location"], "address":route["legs"][0]["end_address"]})
                 decodedLine = routeLine.replace(/\"/g, "")
                 decodedLine = decodePolyline(decodedLine)
                 points = points.concat(decodedLine)
-                console.log(i)
+                console.log("points length:" + points.length + "\n")
               }
             socket.emit("polyline",{line:points, destinations:destinations});
             }
