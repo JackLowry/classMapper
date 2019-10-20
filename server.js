@@ -36,7 +36,7 @@ client.on('connection', function(socket){
              class_details = JSON.parse(lines[lines.length-1])
              socket.emit("textSchedule",class_details);
 
-             for(i = 1; i < lines.length; i++) {
+             for(i = 0; i < lines.length; i++) {
                if(lines[i] == "SCHEDULE_DONE") {
                  break
                }
@@ -44,6 +44,9 @@ client.on('connection', function(socket){
                  let day = lines[i];
                  while(!(lines[i+1] in schedule) && (i+1 < lines.length) && lines[i+1]){
                    i++;
+                   if(lines[i] == "SCHEDULE_DONE") {
+                     break
+                   }
                    schedule[day].push(lines[i])
                  }
                  console.log("" + day + " length: " + schedule[day].length)
@@ -53,7 +56,7 @@ client.on('connection', function(socket){
            fs.unlink('tmp/' + uuid + '_response')
 
            //console.log(schedule)
-           getDayRoute("Monday");
+           //getDayRoute("Monday");
            socket.on('getDayRouteSocket',function(day){
              getDayRoute(day);
            });

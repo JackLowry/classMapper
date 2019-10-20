@@ -290,44 +290,44 @@ socket.on("polyline",function(data){
   var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
   for(i = 0; i < data.destinations.length; i++) {
-    if(data.destinations[i] == null){
-      continue
-    }
-
-    let label_index = []
-
-    console.log(data.destinations.slice(i+1,data.destinations.length))
-
-    function check_in_dest(dest, list) {
-        for(k = 0; k < list.length; k++) {
-          if(list[k] != null && dest.address == list[k].address) {
-            return k
-          }
-        }
-        return false;
-    }
-
-    in_dest = check_in_dest(data.destinations[i], data.destinations.slice(i+1,data.destinations.length))
-
-    if(in_dest) {
-        sum = (parseInt(in_dest) + parseInt(i))
-      label_index.push(parseInt(in_dest) + parseInt(i))
-      data.destinations[sum] = null;
-      in_dest = check_in_dest(data.destinations[i], data.destinations.slice(in_dest+1,data.destinations.length))
-      console.log(label_index)
-    }
-
-    let label = "" + labels[i]
-
-    for(j in label_index) {
-      label += ",           " + labels[label_index[j]]
-    }
+    // if(data.destinations[i] == null){
+    //   continue
+    // }
+    //
+    // let label_index = []
+    //
+    // console.log(data.destinations.slice(i+1,data.destinations.length))
+    //
+    // function check_in_dest(dest, list) {
+    //     for(k = 0; k < list.length; k++) {
+    //       if(list[k] != null && dest.address == list[k].address) {
+    //         return k
+    //       }
+    //     }
+    //     return false;
+    // }
+    //
+    // in_dest = check_in_dest(data.destinations[i], data.destinations.slice(i+1,data.destinations.length))
+    //
+    // if(in_dest) {
+    //     sum = (parseInt(in_dest) + parseInt(i))
+    //   label_index.push(parseInt(in_dest) + parseInt(i))
+    //   data.destinations[sum] = null;
+    //   in_dest = check_in_dest(data.destinations[i], data.destinations.slice(in_dest+1,data.destinations.length))
+    //   console.log(label_index)
+    // }
+    //
+    // let label = "" + labels[i]
+    //
+    // for(j in label_index) {
+    //   label += ",           " + labels[label_index[j]]
+    // }
 
     let marker = new google.maps.Marker({
       position: data.destinations[i]["location"],
       title: data.destinations[i]["address"],
       map: map,
-      label: label,
+      // label: label,
       clickable: true
     });
 
