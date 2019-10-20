@@ -65,7 +65,8 @@
       <!--<input type="text" id='addressSearch'class="form-control" placeholder="Address" aria-label="Address">-->
       <div id = "uploadAddress" style="width: 60%; padding-left: 0px">
         <center>
-          <!--<input type="text" id='addressSearch'class="form-control" placeholder="Address" aria-label="Address" style="float:left; width: 100%; float: left; margin-bottom: 2%;">-->
+          <input type="text" id='addressSearch'class="form-control" placeholder="Dorm address" aria-label="Dorm address" style="float:left; width: 100%; margin-bottom: 2%;">
+
         </center>
       </div>
       <div id = "uploadButtonDiv" style="width: 22%; padding-left: 0px" >                                    <!-- Upload button floated left -->
@@ -220,7 +221,7 @@ function fri(){
 document.getElementById("submitButtonBUTTON").disabled = true;  // initialize button to diabled
 document.getElementById("greenChecker").style.opacity = '0.0'; // initialize green check to 'hidden' state
 
-var input = document.querySelector('input');
+var input = document.getElementById('chatFileOpen');
 input.addEventListener('change', updateSubmitButton);  // looks for change in upload value of upload button
 
 function updateSubmitButton(){
