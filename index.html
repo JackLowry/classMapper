@@ -12,7 +12,7 @@
   <link rel="shortcut icon" href="https://www.rutgers.edu/sites/all/themes/uwide/favicon.ico" type="image/vnd.microsoft.icon">
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9FCsoZWld-8JgJwwz6H4GvM-JtYBDSfY&libraries=places"></script>
   
-  <title>
+  <title class = "font-weight-bold">
     Rutgers ClassMapper
   </title>
 
@@ -308,14 +308,14 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
 
 
   for(i = 0; i < monArray.length; i++){
-    monAgenda = monAgenda + JSON.stringify(monArray[i].name)+" at "+JSON.stringify(monArray[i].acronym)+" ("+JSON.stringify(monArray[i].loc_name)+")"+" starting at "+JSON.stringify(monArray[i].startTime)+" and ending at "+JSON.stringify(monArray[i].endTime)+"\n\n";
+    monAgenda = monAgenda + JSON.stringify(monArray[i].name)+" at "+JSON.stringify(monArray[i].acronym)+" ("+JSON.stringify(monArray[i].loc_name)+")"+" starting at "+JSON.stringify(monArray[i].startTime)+" and ending at "+JSON.stringify(monArray[i].endTime)+"<br>";
 
     monAgenda = monAgenda.replace(/"/g, "");
     //classElement = monArray[i];
     //agenda = agenda + JSON.stringify(classElement) + "<br>";
   }
 
-  document.getElementById("monDesc").textContent = monAgenda;
+  document.getElementById("monDesc").innerHTML = monAgenda;
   document.getElementById("dayOnTable").textContent = "Monday";
 
   //monAgenda = "";
