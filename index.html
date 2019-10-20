@@ -173,6 +173,7 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 <script>
+var socket = io.connect('http://127.0.0.1:4000');
 function gray(){
 
   var children = document.getElementById('tabs').children;
@@ -182,9 +183,12 @@ function gray(){
   // Do stuff
 }
 }
+
 function mon(){
   gray();
   document.getElementById('mon').style.backgroundColor='black';
+  let monVar="Monday";
+  socket.emit('getDayRouteSocket',monVar);
 }
 function tue(){
   gray();
@@ -219,7 +223,7 @@ function updateSubmitButton(){
 $('.new_Btn').on("click" , function () {
     $('#chatFileOpen').click();
 });
-var socket = io.connect('http://127.0.0.1:4000');
+
 function upload(){
 
   var length = input.files.length;
