@@ -24,6 +24,7 @@ client.on('connection', function(socket){
           console.error(`stderr: ${data}`);
         });
 
+        class_details = null;
         mapper.on('close', (code) => {
            console.log(`child process exited with code ${code}`);
 
@@ -31,7 +32,11 @@ client.on('connection', function(socket){
              if(err) throw err;
 
              lines = data.toString().split("\n")
-             for(i = 0; i < lines.length; i++) {
+
+             class_details = lines[0]
+             console.log("class_details: " + class_details + "\n")
+
+             for(i = 1; i < lines.length; i++) {
                if(lines[i] in schedule) {
                  let day = lines[i];
                  while(!(lines[i+1] in schedule) && (i+1 < lines.length) && lines[i+1]){
@@ -58,7 +63,7 @@ client.on('connection', function(socket){
               route = JSON.parse(schedule[day][0])["routes"][0]["legs"][0]
               destinations.push({"location":route["start_location"], "address":route["start_address"]})
             }
-              for(i = 0; i < schedule[day].length; i++) {
+              for(i = 1; i < schedule[day].length; i++) {
                 route = JSON.parse(schedule[day][0])["routes"][0]
                 routeLine = route["overview_polyline"]["points"]
                 destinations.push({"location":route["legs"][0]["end_location"], "address":route["legs"][0]["end_address"]})
