@@ -256,7 +256,9 @@ $('.new_Btn').on("click" , function () {
 function upload(){
 
   var length = input.files.length;
-  input.files.item(0).text().then(text => socket.emit('upload',{file:text}));
+  campus=document.getElementById('campusDropdown').value;
+  input.files.item(0).text().then(text => socket.emit('upload',{file:text,campus:campus}));
+
 }
 
 socket.on("polyline",function(data){
