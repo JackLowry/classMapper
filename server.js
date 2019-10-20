@@ -34,12 +34,8 @@ client.on('connection', function(socket){
              lines = data.toString().split("\n")
 
              class_details = lines[0]
-<<<<<<< HEAD
-             //console.log("class_details: " + class_details + "\n")
-=======
              console.log("class_details: " + class_details + "\n")
              socket.emit("textSchedule",class_details);
->>>>>>> 341ebc0bf0fc7afcd4c2bab5044ac751ea1cb850
 
              for(i = 1; i < lines.length; i++) {
                if(lines[i] in schedule) {
