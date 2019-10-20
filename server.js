@@ -10,7 +10,7 @@ client.on('connection', function(socket){
 
       uuid = uuidv1();
 
-      fs.writeFile("tmp/"+uuid, data.file, function(err) {
+      fs.writeFile("tmp/"+uuid, "" + data.home + "\n" + data.file, function(err) {
         if(err) {
             console.log("uh oh")
             return console.log(err);
@@ -47,6 +47,7 @@ client.on('connection', function(socket){
                  console.log("" + day + " length: " + schedule[day].length)
                }
              }
+           fs.unlink('tmp/' + uuid + '_response')
 
            console.log(schedule)
            getDayRoute("Monday");
@@ -64,20 +65,18 @@ client.on('connection', function(socket){
             if(schedule[day].length > 0) {
               route = JSON.parse(schedule[day][0])["routes"][0]
               destinations.push({"location":route["legs"][0]["start_location"], "address":route["legs"][0]["start_address"]})
-              routeLine = route["overview_polyline"]["points"]
-              decodedLine = routeLine.replace(/\"/g, "")
-              decodedLine = decodePolyline(decodedLine)
-              points = points.concat(decodedLine)
-              console.log("points length:" + points.length + "\n")
+              //console.log(": " + JSON.stringify(destinations[destinations.length-1]) + " day: " + day + " item: " + -1 +"\n")
+              //console.log("points length:" + points.length + "\n")
             }
-              for(i = 1; i < schedule[day].length; i++) {
-                route = JSON.parse(schedule[day][i])["routes"][ 0]
+              for(i = 0; i < schedule[day].length; i++) {
+                route = JSON.parse(schedule[day][i])["routes"][0]
                 routeLine = route["overview_polyline"]["points"]
                 destinations.push({"location":route["legs"][0]["end_location"], "address":route["legs"][0]["end_address"]})
+                //console.log("dest_stuff: " + JSON.stringify(destinations[destinations.length-1]) + " day: " + day + " item: " + i + "\n")
                 decodedLine = routeLine.replace(/\"/g, "")
                 decodedLine = decodePolyline(decodedLine)
                 points = points.concat(decodedLine)
-                console.log("points length:" + points.length + "\n")
+                //console.log("points length:" + points.length + "\n")
               }
             socket.emit("polyline",{line:points, destinations:destinations});
             }

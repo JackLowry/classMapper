@@ -5,6 +5,7 @@ import json
 import sys
 import os
 import math
+import polyline
 
 cal_file = sys.argv[1]
 print(f"file: {cal_file}")
@@ -25,8 +26,7 @@ bus_api_headers = {"x-rapidapi-host": "transloc-api-1-2.p.rapidapi.com",
 	               "x-rapidapi-key": "726c140f50mshcda6ecc676bb6d5p137173jsnc9fa1972a6f7"}
 bus_res = requests.get(bus_api_call, headers=bus_api_headers).json()
 
-
-
+acceptable_routes = ["4012616", "4012618", "4012620", "4012624", "4012626", "4012628", "4012630", "4012632", "4012634"]
 
 class Position:
     def __init__(self, lat, long):
@@ -42,9 +42,10 @@ class Position:
     def distance(self, lat, long):
         return math.sqrt((self.lat-lat)**2 + (self.long-long)**2)
 
+
 class Location:
 
-    def __init__(self, position, name, acronym):
+    def __init__(self, position, name, acronym, campus = None):
         self.acronym = acronym
         self.position = position
         if name is None:
@@ -52,6 +53,8 @@ class Location:
             self.campus = buildings[acronym.split('-')[0]]["campus"]
         else:
             self.name = name
+        if not campus is None:
+            self.campus = campus
 
 
     def __eq__(self, loc2):
@@ -107,7 +110,11 @@ class Class:
 
 
 schedule = {"Monday":[], "Tuesday":[], "Wednesday":[], "Thursday":[], "Friday":[]}
+home = cal.readline().strip()
+home_campus = cal.readline().strip()
 
+dorm_class = Class(None, None, None, home, Location(None, home, None, campus=home_campus))
+dorm_class.find_position()
 while True:
     line = cal.readline().strip()
     if not line:
@@ -154,6 +161,10 @@ write_file = open(cal_file + "_response", "w+")
 
 schedule_dict = {"Monday":[], "Tuesday":[], "Wednesday":[], "Thursday":[], "Friday":[]}
 for day in schedule:
+    schedule[day].insert(0, dorm_class)
+    schedule[day].append(dorm_class)
+
+
     for c in schedule[day]:
         schedule_dict[day].append(c.get_dict())
 
@@ -171,51 +182,62 @@ for day in schedule:
         if(class1.location.campus != class2.location.campus):
             start_min_dist = sys.maxsize
             start_min_index = 0
+            start_pos = {}
 
             end_min_dist = sys.maxsize
             end_min_index = 0
-            for i in range(len(bus_res["data"])):
-                stop = bus_res["data"][i];
+            end_pos = {}
+            for j in range(len(bus_res["data"])):
+                stop = bus_res["data"][j];
+                stop_pos = stop["location"]
                 start_dist = class1.location.position.distance(stop["location"]["lat"], stop["location"]["lng"])
                 end_dist = class2.location.position.distance(stop["location"]["lat"], stop["location"]["lng"])
                 if(start_dist < start_min_dist):
                     start_min_dist = start_dist;
-                    start_min_index = i;
+                    start_min_index = j;
+                    start_pos = stop_pos
 
                 if(end_dist < end_min_dist):
-                    start_end_dist = end_dist;
-                    start_end_index = i;
+                    end_min_dist = end_dist;
+                    end_min_index = j;
+                    end_pos = stop_pos
 
             start_bus_loc = bus_res["data"][start_min_index]
+            print(f"start_name: {start_bus_loc['name']}")
             start_bus_loc = Location(start_bus_loc["location"], start_bus_loc["name"] + " Bus Stop Rutgers", None)
-            start_address_str = start_bus_loc.get_address_str()
+            start_bus_tuple = (start_bus_loc.position["lat"], start_bus_loc.position["lng"])
+
 
             end_bus_loc = bus_res["data"][end_min_index]
+            print(f"end_name: {end_bus_loc['name']}")
             end_bus_loc = Location(end_bus_loc["location"], end_bus_loc["name"] + " Bus Stop Rutgers", None)
-            end_address_str = end_bus_loc.get_address_str()
+            end_bus_tuple = (round(end_bus_loc.position["lat"],5), round(end_bus_loc.position["lng"],5))
 
             class1_address_str = class1.location.get_address_str()
             class2_address_str = class2.location.get_address_str()
+            start_pos_address_str = f"{start_pos['lat']},{start_pos['lng']}"
+            end_pos_address_str = f"{end_pos['lat']},{end_pos['lng']}"
 
             api_call1 = ("https://maps.googleapis.com/maps/api/directions/json?"
                         f"origin={class1_address_str}&"
-                        f"destination={start_address_str}&"
+                        f"destination={start_pos_address_str }&"
                         "mode=walking&"
                         f"key={api_key}")
 
             api_call2 = ("https://maps.googleapis.com/maps/api/directions/json?"
-                        f"origin={start_address_str}&"
-                        f"destination={end_address_str}&"
+                        f"origin={start_pos_address_str }&"
+                        f"destination={end_pos_address_str }&"
                         "mode=driving&"
                         f"key={api_key}")
 
             api_call3 = ("https://maps.googleapis.com/maps/api/directions/json?"
-                        f"origin={end_address_str}&"
+                        f"origin={end_pos_address_str}&"
                         f"destination={class2_address_str}&"
                         "mode=walking&"
                         f"key={api_key}")
 
             calls = [api_call1, api_call2, api_call3]
+            print(calls)
 
             for c in calls:
                 response = requests.get(c)
