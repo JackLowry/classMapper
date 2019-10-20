@@ -258,7 +258,7 @@ line1 = null;
 function upload(){
 
   var length = input.files.length;
-  campus = "BUS"
+  campus = document.getElementById('campusDropdown').value;
   home_address = "Barr Hall, Piscataway, NJ\n {campus}" //TODO fix this
   input.files.item(0).text().then(text => socket.emit('upload',{file:text, home:home_address}));
 }
