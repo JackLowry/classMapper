@@ -16,7 +16,7 @@ client.on('connection', function(socket){
             return console.log(err);
         }
 
-        schedule = {"Monday":[], "Tuesday":[], "Wednesday":[], "Thursday":[], "Friday":[]}
+        var schedule = {"Monday":[], "Tuesday":[], "Wednesday":[], "Thursday":[], "Friday":[]}
         var spawn = require("child_process").spawn;
         var mapper = spawn('python3',["mapper.py", "tmp/"+uuid] );
 
@@ -42,11 +42,18 @@ client.on('connection', function(socket){
              }
 
            console.log(schedule)
+           getDayRoute("Monday");
+           socket.on('getDayRouteSocket',function(day){
+             getDayRoute(day);
+           });
 
             //for(let day in schedule){
-            let day = "Monday"
+          function getDayRoute(day)
+          {
+            console.log(day);
             points = []
             destinations = []
+            //console.log(schedule);
             if(schedule[day].length > 0) {
               route = JSON.parse(schedule[day][0])["routes"][0]["legs"][0]
               destinations.push({"location":route["start_location"], "address":route["start_address"]})
@@ -61,7 +68,7 @@ client.on('connection', function(socket){
                 console.log(i)
               }
             socket.emit("polyline",{line:points, destinations:destinations});
-            //}
+            }
 
            })
         });
