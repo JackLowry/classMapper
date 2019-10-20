@@ -70,6 +70,9 @@ client.on('connection', function(socket){
             socket.emit("polyline",{line:points, destinations:destinations});
             }
 
+            //getting text of schedule for the table
+            
+
            })
         });
 
