@@ -261,6 +261,7 @@ $('.new_Btn').on("click" , function () {
 line1 = null;
 
 function upload(){
+  document.getElementById('submitButtonBUTTON').disabled = true;
   document.getElementById('loading').style.display='inline';
   var length = input.files.length;
   campus = document.getElementById('campusDropdown').value;
@@ -272,6 +273,7 @@ function upload(){
 
 socket.on("polyline",function(data){
   initMap();
+  document.getElementById('submitButtonBUTTON').disabled = false;
   document.getElementById('loading').style.display='none';
   line1 = new google.maps.Polyline({
     path: data.line,
