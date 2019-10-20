@@ -114,7 +114,7 @@ home = cal.readline().strip()
 home_campus = cal.readline().strip()
 
 dorm_class = Class(None, None, None, home, Location(None, home, None, campus=home_campus))
-sys.stderr.write(f"dorm_campus: {dorm_class.location.campus}")
+#sys.stderr.write(f"dorm_campus: {dorm_class.location.campus}")
 dorm_class.find_position()
 while True:
     line = cal.readline().strip()
@@ -135,7 +135,7 @@ while True:
 
         date = datetime.date(int(year), int(month), int(day))
 
-        sys.stderr.write(location + "\n")
+        #sys.stderr.write(location + "\n")
         loc = Location(None, None, location)
         newClass = Class(date, int(startTime), int(endTime), name, loc)
         weekday = newClass.date.strftime('%A')
@@ -183,6 +183,8 @@ for day in schedule:
         class2 = schedule[day][i]
         class2.find_position()
 
+
+        sys.stderr.write(f"campuses: {class1.location.campus}, {class2.location.campus}\n")
         if(class1.location.campus != class2.location.campus):
             start_min_dist = sys.maxsize
             start_min_index = 0
@@ -250,12 +252,12 @@ for day in schedule:
             calls = [api_call1, api_call2, api_call3]
             print(calls)
 
-            for c in calls:
+            for c in calls:class2.location.campus
                 response = requests.get(c)
                 output = json.dumps(response.json())
                 write_file.write(f"{output}\n")
 
-            schedule_dict_count += 1
+            schedule_dict_count += 2
 
 
         else:
