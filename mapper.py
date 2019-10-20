@@ -166,12 +166,12 @@ for day in schedule:
     schedule[day].insert(0, dorm_class)
     schedule[day].append(dorm_class)
 
-    schedule_dict[day].insert(0, {"message":"Leave your dorm at " + dorm_class.name + "<br><br>"})
+    schedule_dict[day].insert(0, {"message":"Leave your dorm at " + dorm_class.name + "<hr>"})
 
     for c in schedule[day]:
         schedule_dict[day].append(c.get_dict())
 
-    schedule_dict[day].append({"message":"Come back to your dorm at " + dorm_class.name + "<br><br>"})
+    schedule_dict[day].append({"message":"Come back to your dorm at " + dorm_class.name + "<hr>"})
 
 
 for day in schedule:
@@ -219,8 +219,8 @@ for day in schedule:
 
             acronym_dict = {"BUS":"Busch", "C/D":"Cook Douglass", "CAC":"College Ave:", "LIV":"Livingston"}
             sys.stderr.write(class2.location.campus + "\n")
-            message_str =  "Get on the bus at the " + start_bus_loc.name + " heading towards " + acronym_dict[class2.location.campus]    + "<br><br>"
-            message_str += "Get off the bus at the " + end_bus_loc.name + "<br><br>"
+            message_str =  "Get on the bus at the " + start_bus_loc.name + " heading towards " + acronym_dict[class2.location.campus]    + "<hr>"
+            message_str += "Get off the bus at the " + end_bus_loc.name + "<hr>"
 
             schedule_dict[day].insert(schedule_dict_count, {"message":message_str})
 
