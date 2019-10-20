@@ -110,7 +110,7 @@
 
     </div>
 
-    <div id='schedule' style='float:left;width:100%;padding-right:15px;padding-top:10px'>
+    <div id='schedule' style='display:none;float:left;width:100%;padding-right:15px;padding-top:10px'>
 
         <style>
           table, th, td {
@@ -374,7 +374,7 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
     //classElement = monArray[i];
     //agenda = agenda + JSON.stringify(classElement) + "<br>";
   }
-
+  document.getElementById('schedule').style.display='inline';
   document.getElementById("monDesc").innerHTML = monAgenda;
   document.getElementById("dayOnTable").textContent = "Monday";
 
