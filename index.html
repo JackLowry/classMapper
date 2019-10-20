@@ -43,13 +43,13 @@
       <img src=ruShield2.png style='height: 100%; width: 100%; object-fit: contain;'/>
     </center>
   </div>
-  <h2 style="margin-left: 5%">
+  <h2 style="margin-left: 5%; margin-top: 1%" class="font-weight-bold">
     Rutgers ClassMapper
   </h2>
 </div>   <!-- Top div. -->
 <div class="p-0 mb-0 bg-dark"></div>                                                                  <!-- stylistic stuff -->
 <div class="p-2 mb-1 bg-dark"></div>                                                                  <!-- stylistic stuff -->
-<div class="p-5 mb-2 text-white" style="height: 100%;">                                     <!-- File input Div -->
+<div class="p-5 mb-2 text-white" style="height: 100%; margin-top: -20px;">                                     <!-- File input Div -->
   <body scroll="no" style="overflow:hidden;">     <!-- disable scrolling -->
     <!--
     <center>
@@ -65,7 +65,7 @@
       <div id = "uploadButtonDiv" style="width: 22%; padding-left: 0px" >                                    <!-- Upload button floated left -->
         <center>
           <div class='new_Btn' style="float:left; width: 100% float: left;">
-            <button class = "btn btn-primary border border-dark rounded" type ="button">Upload your schedule (.ics file) here!</button>
+            <button class = "btn btn-secondary" type ="button">Upload your schedule (.ics file) here!</button>
           </div>
           <input class="btn btn-primary" type='file' id='chatFileOpen' name='ics file' accept='.ics' style="display:none"> <!-- FILE INPUT -->
         </center>
@@ -139,11 +139,11 @@
 
     <div style='float:right;width:70%;height:90%'>
       <div id='tabs'style="height:5%">
-        <div id='mon'class='tab' >Monday</div>
-        <div class='tab' >Tuesday</div>
-        <div class='tab' >Wednesday</div>
-        <div class='tab' >Thursday</div>
-        <div class='tab' >Friday</div>
+        <div onclick='mon()' id='mon'class='tab' >Monday</div>
+        <div onclick='tue()' id='tue'class='tab' >Tuesday</div>
+        <div onclick='wed()' id='wed'class='tab' >Wednesday</div>
+        <div onclick='thu()' id='thu'class='tab' >Thursday</div>
+        <div onclick='fri()' id='fri'class='tab' >Friday</div>
 
 
 
@@ -173,10 +173,43 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 <script>
+var socket = io.connect('http://127.0.0.1:4000');
+function gray(){
+
+  var children = document.getElementById('tabs').children;
+  for (var i = 0; i < children.length; i++) {
+  var child = children[i];
+  child.style.backgroundColor='gray';
+  // Do stuff
+}
+}
 
 function mon(){
-  document.getElementById(mon).backgroundColor='black';
+  gray();
+  document.getElementById('mon').style.backgroundColor='black';
+  socket.emit('getDayRouteSocket',"Monday");
 }
+function tue(){
+  gray();
+  document.getElementById('tue').style.backgroundColor='black';
+  socket.emit('getDayRouteSocket',"Tuesday");
+}
+function wed(){
+  gray();
+  document.getElementById('wed').style.backgroundColor='black';
+  socket.emit('getDayRouteSocket',"Wednesday");
+}
+function thu(){
+  gray();
+  document.getElementById('thu').style.backgroundColor='black';
+  socket.emit('getDayRouteSocket',"Thursday");
+}
+function fri(){
+  gray();
+  document.getElementById('fri').style.backgroundColor='black';
+  socket.emit('getDayRouteSocket',"Friday");
+}
+
 document.getElementById("submitButtonBUTTON").disabled = true;  // initialize button to diabled
 document.getElementById("greenChecker").style.opacity = '0.0'; // initialize green check to 'hidden' state
 
@@ -193,7 +226,7 @@ function updateSubmitButton(){
 $('.new_Btn').on("click" , function () {
     $('#chatFileOpen').click();
 });
-var socket = io.connect('http://127.0.0.1:4000');
+
 function upload(){
 
   var length = input.files.length;
@@ -201,6 +234,8 @@ function upload(){
 }
 
 socket.on("polyline",function(data){
+  var line = [];
+  
   let line1 = new google.maps.Polyline({
     path: data.line,
     strokeColor: '#FF0000',
@@ -216,9 +251,10 @@ socket.on("polyline",function(data){
       clickable: true
     });
 
+    let label = "<p style='color:black'>"+data.destinations[i]['address']+"</p>";
     let infoWindow = new google.maps.InfoWindow({
       position: marker.getPosition(),
-      content: data.destinations[i]["address"]
+      content: label
     });
 
     marker.addListener('click', function() {
