@@ -217,9 +217,9 @@ for day in schedule:
             end_bus_loc = Location(end_bus_loc["location"], end_bus_loc["name"] + " Bus Stop Rutgers", None)
             end_bus_tuple = (round(end_bus_loc.position["lat"],5), round(end_bus_loc.position["lng"],5))
 
-            #acronym_dict = {"BUS":"Busch", "C/D":"Cook Douglass", "CAC":"College Ave:", "LIV":"Livingston"}
+            acronym_dict = {"BUS":"Busch", "C/D":"Cook Douglass", "CAC":"College Ave:", "LIV":"Livingston"}
             sys.stderr.write(class2.location.campus + "\n")
-            message_str =  "Get on the bus at the " + start_bus_loc.name + " heading towards " + class2.location.campus + "<br><br>"
+            message_str =  "Get on the bus at the " + start_bus_loc.name + " heading towards " + acronym_dict[class2.location.campus]    + "<br><br>"
             message_str += "Get off the bus at the " + end_bus_loc.name + "<br><br>"
 
             schedule_dict[day].insert(schedule_dict_count, {"message":message_str})
