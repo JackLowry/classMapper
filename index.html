@@ -216,9 +216,10 @@ socket.on("polyline",function(data){
       clickable: true
     });
 
+    let label = "<p style='color:black'>"+data.destinations[i]['address']+"</p>";
     let infoWindow = new google.maps.InfoWindow({
       position: marker.getPosition(),
-      content: data.destinations[i]["address"]
+      content: label
     });
 
     marker.addListener('click', function() {
