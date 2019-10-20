@@ -12,9 +12,11 @@
   <link rel="shortcut icon" href="https://www.rutgers.edu/sites/all/themes/uwide/favicon.ico" type="image/vnd.microsoft.icon">
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9FCsoZWld-8JgJwwz6H4GvM-JtYBDSfY&libraries=places"></script>
 
-  <title style="font-weight: bold;">
-    <strong>Rutgers ClassMapper</strong>
-  </title>
+  <div style="font-weight: bold;">
+    <title> 
+      <h1><strong>Rutgers ClassMapper</strong></h1>
+    </title>
+  </div>
 
 
     <title>Index</title>
@@ -366,7 +368,7 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
 
 
   for(i = 0; i < monArray.length; i++){
-    monAgenda = "- " + monAgenda + JSON.stringify(monArray[i].name)+" at "+JSON.stringify(monArray[i].acronym)+" ("+JSON.stringify(monArray[i].loc_name)+")"+" starting at "+JSON.stringify(monArray[i].startTime)+" and ending at "+JSON.stringify(monArray[i].endTime)+"<br>"+"<br>";
+    monAgenda = monAgenda + JSON.stringify(monArray[i].name)+" at "+JSON.stringify(monArray[i].acronym)+" ("+JSON.stringify(monArray[i].loc_name)+")"+" starting at "+JSON.stringify(monArray[i].startTime)+" and ending at "+JSON.stringify(monArray[i].endTime)+"<br>"+"<br>";
 
     monAgenda = monAgenda.replace(/"/g, "");
     //classElement = monArray[i];
@@ -379,7 +381,7 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
   //monAgenda = "";
 
   for(i = 0; i < tueArray.length; i++){
-    tueAgenda = "- " + tueAgenda + JSON.stringify(tueArray[i].name)+" at "+JSON.stringify(tueArray[i].acronym)+" ("+JSON.stringify(tueArray[i].loc_name)+")"+" starting at "+JSON.stringify(tueArray[i].startTime)+" and ending at "+JSON.stringify(tueArray[i].endTime)+"<br>"+"<br>";
+    tueAgenda = tueAgenda + JSON.stringify(tueArray[i].name)+" at "+JSON.stringify(tueArray[i].acronym)+" ("+JSON.stringify(tueArray[i].loc_name)+")"+" starting at "+JSON.stringify(tueArray[i].startTime)+" and ending at "+JSON.stringify(tueArray[i].endTime)+"<br>"+"<br>";
 
     tueAgenda = tueAgenda.replace(/"/g, "");
   }
@@ -389,7 +391,7 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
   //tueAgenda = "";
 
   for(i = 0; i < wedArray.length; i++){
-    wedAgenda = "- " + wedAgenda + JSON.stringify(wedArray[i].name)+" at "+JSON.stringify(wedArray[i].acronym)+" ("+JSON.stringify(wedArray[i].loc_name)+")"+" starting at "+JSON.stringify(wedArray[i].startTime)+" and ending at "+JSON.stringify(wedArray[i].endTime)+"<br>"+"<br>";
+    wedAgenda = wedAgenda + JSON.stringify(wedArray[i].name)+" at "+JSON.stringify(wedArray[i].acronym)+" ("+JSON.stringify(wedArray[i].loc_name)+")"+" starting at "+JSON.stringify(wedArray[i].startTime)+" and ending at "+JSON.stringify(wedArray[i].endTime)+"<br>"+"<br>";
 
     wedAgenda = wedAgenda.replace(/"/g, "");
   }
@@ -398,7 +400,7 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
   //wedAgenda = "";
 
   for(i = 0; i < thuArray.length; i++){
-    thuAgenda = "- " + thuAgenda + JSON.stringify(thuArray[i].name)+" at "+JSON.stringify(thuArray[i].acronym)+" ("+JSON.stringify(thuArray[i].loc_name)+")"+" starting at "+JSON.stringify(thuArray[i].startTime)+" and ending at "+JSON.stringify(thuArray[i].endTime)+"<br>"+"<br>";
+    thuAgenda = thuAgenda + JSON.stringify(thuArray[i].name)+" at "+JSON.stringify(thuArray[i].acronym)+" ("+JSON.stringify(thuArray[i].loc_name)+")"+" starting at "+JSON.stringify(thuArray[i].startTime)+" and ending at "+JSON.stringify(thuArray[i].endTime)+"<br>"+"<br>";
 
     thuAgenda = thuAgenda.replace(/"/g, "");
   }
@@ -406,7 +408,7 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
   //thuAgenda = "";
 
   for(i = 0; i < friArray.length; i++){
-    friAgenda = "- " + friAgenda + JSON.stringify(friArray[i].name)+" at "+JSON.stringify(friArray[i].acronym)+" ("+JSON.stringify(friArray[i].loc_name)+")"+" starting at "+JSON.stringify(friArray[i].startTime)+" and ending at "+JSON.stringify(friArray[i].endTime)+"<br>"+"<br>";
+    friAgenda = friAgenda + JSON.stringify(friArray[i].name)+" at "+JSON.stringify(friArray[i].acronym)+" ("+JSON.stringify(friArray[i].loc_name)+")"+" starting at "+JSON.stringify(friArray[i].startTime)+" and ending at "+JSON.stringify(friArray[i].endTime)+"<br>"+"<br>";
 
     friAgenda = friAgenda.replace(/"/g, "");
   }
