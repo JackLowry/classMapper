@@ -219,8 +219,8 @@ for day in schedule:
 
             #acronym_dict = {"BUS":"Busch", "C/D":"Cook Douglass", "CAC":"College Ave:", "LIV":"Livingston"}
             sys.stderr.write(class2.location.campus + "\n")
-            message_str =  "Get on the bus at the " + start_bus_loc.name + " heading towards " + class2.location.campus + "<br><br>"
-            message_str += "Get off the bus at the " + end_bus_loc.name + "<br><br>"
+            message_str =  "Get on the bus at the " + start_bus_loc.name + " heading towards " + class2.location.campus + "<br><hr>"
+            message_str += "Get off the bus at the " + end_bus_loc.name + "<br><hr>"
 
             schedule_dict[day].insert(schedule_dict_count, {"message":message_str})
 
