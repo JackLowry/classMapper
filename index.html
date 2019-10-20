@@ -62,19 +62,18 @@
     -->
   <div id='leftDiv' style='width:30%; float:left;'>    <!-- Master left side div -->
     <!--<input type="text" id='addressSearch'class="form-control" placeholder="Address" aria-label="Address">-->
-    
+
     <div id = "textUploadAndDropdown" style="width: 60%; padding-left: 0px">
 
       <div class="btn-group" style = "float: left;">
-        
-        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Campus</button>
-        
-        <div class="dropdown-menu">
-          <a id = "buschOption" class="dropdown-item" href="#">Busch</a>
-          <a id = "collegeOption" class="dropdown-item" href="#">College Ave</a>
-          <a id = "livingstonOption" class="dropdown-item" href="#">Livingston</a>
-          <a id = "cookOption" class="dropdown-item" href="#">Cook/Douglass</a>
-        </div>
+
+        <select id='campusDropdown' class="browser-default custom-select">
+          <option selected>Open this select menu</option>
+          <option value="BUS">Busch</option>
+          <option value="CAC">College Ave</option>
+          <option value="LIV">Livingston</option>
+          <option value="C/D">Cook/Douglass</option>
+        </select>
       </div>
 
       <div id = "uploadAddress" style="padding-left: 1px; float: right; width: 65%">
