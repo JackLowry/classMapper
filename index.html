@@ -291,24 +291,38 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){
 
   for(i = 0; i < monArray.length; i++){
     classElement = monArray[i];
-    String(classElement) + "<br>";
+    agenda = agenda + String(classElement) + "<br>";
   }
+
+  document.getElementById("monDesc").textContent = agenda;
 
   for(i = 0; i < tueArray.length; i++){
-
+    classElement = tueArray[i];
+    agenda = agenda + String(classElement) + "<br>";
   }
+
+  document.getElementById("monDesc").textContent = agenda;
 
   for(i = 0; i < wedArray.length; i++){
-
+    classElement = wedArray[i];
+    agenda = agenda + String(classElement) + "<br>";
   }
+
+  document.getElementById("monDesc").textContent = agenda;
 
   for(i = 0; i < thuArray.length; i++){
-
+    classElement = thuArray[i];
+    agenda = agenda + String(classElement) + "<br>";
   }
+
+  document.getElementById("monDesc").textContent = agenda;
 
   for(i = 0; i < friArray.length; i++){
-
+    classElement = friArray[i];
+    agenda = agenda + String(classElement) + "<br>";
   }
+
+  document.getElementById("monDesc").textContent = agenda;
 
 }
 
