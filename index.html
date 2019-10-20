@@ -107,17 +107,27 @@
           </tr>
           <tr>
             <td>Monday</td>
-            <td>omg so many classes look how many classes I have ohhh man it keeps going WOAH</td>
+            <td id = "monDesc">Nothing!</td>
 
           </tr>
           <tr>
             <td>Tuesday</td>
-            <td>yeet</td>
+            <td id = "tueDesc">Nothing!</td>
 
           </tr>
           <tr>
             <td>Wednesday</td>
-            <td>uh huh</td>
+            <td id = "wedDesc">Nothing!</td>
+
+          </tr>
+          <tr>
+            <td>Thursday</td>
+            <td id = "thuDesc">Nothing!</td>
+
+          </tr>
+          <tr>
+            <td>Friday</td>
+            <td id = "friDesc">Nothing!</td>
 
           </tr>
         </table>
@@ -262,12 +272,42 @@ socket.on("polyline",function(data){
     })
   }
 
+
   line1.setMap(map);
   //map.addPolyline(line1);
 });
 
 
+//script to put all classes under their respective day's table row.
+//5 arrays, traverses each array.
+function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){
 
+  table = document.getElementById("table");
+  var agenda;
+  var classElement;
+
+  for(i = 0; i < monArray.length; i++){
+    classElement = monArray[i];
+    String(classElement) + "<br>";
+  }
+
+  for(i = 0; i < tueArray.length; i++){
+
+  }
+
+  for(i = 0; i < wedArray.length; i++){
+
+  }
+
+  for(i = 0; i < thuArray.length; i++){
+
+  }
+
+  for(i = 0; i < friArray.length; i++){
+
+  }
+
+}
 
 
 </script>
