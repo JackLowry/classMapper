@@ -33,7 +33,7 @@ client.on('connection', function(socket){
 
              lines = data.toString().split("\n")
 
-             class_details = lines[0]
+             class_details = JSON.parse(lines[0])
              console.log("class_details: " + class_details + "\n")
              socket.emit("textSchedule",class_details);
 

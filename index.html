@@ -10,6 +10,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="shortcut icon" href="https://www.rutgers.edu/sites/all/themes/uwide/favicon.ico" type="image/vnd.microsoft.icon">
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9FCsoZWld-8JgJwwz6H4GvM-JtYBDSfY&libraries=places"></script>
 
   <title>
     Rutgers ClassMapper
@@ -49,7 +50,7 @@
 </div>   <!-- Top div. -->
 <div class="p-0 mb-0 bg-dark"></div>                                                                  <!-- stylistic stuff -->
 <div class="p-2 mb-1 bg-dark"></div>                                                                  <!-- stylistic stuff -->
-<div class="p-5 mb-2 text-white" style="height: 100%;">                                     <!-- File input Div -->
+<div class="p-5 mb-2 text-white" style="height: 100%; margin-top: -1%">                                     <!-- File input Div -->
   <body scroll="no" style="overflow:hidden;">     <!-- disable scrolling -->
     <!--
     <center>
@@ -60,24 +61,48 @@
     </center>
     -->
   <div id='leftDiv' style='width:30%; float:left;'>    <!-- Master left side div -->
-    <div id = "buttonDivMain" style="float: left; width: 100%;" class="clearfix">  <!-- Fits both submit and upload buttons in one div, has border and clearfix  -->
+    <!--<input type="text" id='addressSearch'class="form-control" placeholder="Address" aria-label="Address">-->
 
-      <div id = "uploadButtonDiv" style="width: 22%; padding-left: 0px" >                                    <!-- Upload button floated left -->
-        <center>
-          <div class='new_Btn' style="float:left; width: 100% float: left;">
-            <button class = "btn btn-outline-dark" type ="button">Upload your schedule (.ics file) here!</button>
-          </div>
-          <input class="btn btn-primary" type='file' id='chatFileOpen' name='ics file' accept='.ics' style="display:none"> <!-- FILE INPUT -->
-        </center>
+    <div id = "textUploadAndDropdown" style="width: 60%; padding-left: 0px">
+
+      <div class="btn-group" style = "float: left;">
+
+        <select id='campusDropdown' class="browser-default custom-select">
+          <option selected>Open this select menu</option>
+          <option value="BUS">Busch</option>
+          <option value="CAC">College Ave</option>
+          <option value="LIV">Livingston</option>
+          <option value="C/D">Cook/Douglass</option>
+        </select>
       </div>
 
-      <div id="greenChecker" style='height: 25px; width: 25px; float: left; padding-left: 0; padding-right: 0; margin-left: 2.5%;'>    <!-- div that holds the green check mark -->
+      <div id = "uploadAddress" style="padding-left: 1px; float: right; width: 65%">
+          <center>
+            <input type="text" id='addressSearch'class="form-control" placeholder="Dorm address" aria-label="Dorm address" style="float:left; width: 100%; margin-bottom: 2%;">
+
+          </center>
+      </div>
+
+    </div>
+
+    <div id = "buttonDivMain" style="float: left; width: 100%; height: 75px" class="clearfix">  <!-- Fits both submit and upload buttons in one div, has border and clearfix  -->
+
+      <div id = "uploadButtonDiv" style="width: auto; padding-left: 0px; float: left;" >                              <!-- Upload button floated left -->
+
+          <div class='new_Btn' style="width: 100%;">
+            <button class = "btn btn-dark" type ="button">Upload your schedule (.ics file) here!</button>
+          </div>
+          <input class="btn btn-primary" type='file' id='chatFileOpen' name='ics file' accept='.ics' style="display:none"> <!-- FILE INPUT -->
+
+      </div>
+
+      <div id="greenChecker" style='height: 25px; width: 25px; float: left; padding-left: 0; padding-right: 0; margin-left: 2.5%; margin-right: 2.5%'>    <!-- div that holds the green check mark -->
         <center>
           <img src=greenTick.png style='height: 100%; width: 100%; object-fit: contain;'/>
         </center>
       </div>
 
-      <div id = "submitButtonDiv" style="width: 22%; padding-right: 2%; padding-left: 0; float: right">               <!-- Submit button floated left to border upload button -->
+      <div id = "submitButtonDiv" style="width: 22%; padding-right: 2%; padding-left: 0; float: left">               <!-- Submit button floated left to border upload button -->
         <button id = "submitButtonBUTTON" onclick='upload()' type="button" class="btn btn-primary btn-success btn-block border border-dark rounded"> Submit! </button>  <!-- submit button. INITIALIZED IN JS BELOW -->
       </div>
 
@@ -106,28 +131,8 @@
 
           </tr>
           <tr>
-            <td>Monday</td>
+            <td id = "dayOnTable"></td>
             <td id = "monDesc">Nothing!</td>
-
-          </tr>
-          <tr>
-            <td>Tuesday</td>
-            <td id = "tueDesc">Nothing!</td>
-
-          </tr>
-          <tr>
-            <td>Wednesday</td>
-            <td id = "wedDesc">Nothing!</td>
-
-          </tr>
-          <tr>
-            <td>Thursday</td>
-            <td id = "thuDesc">Nothing!</td>
-
-          </tr>
-          <tr>
-            <td>Friday</td>
-            <td id = "friDesc">Nothing!</td>
 
           </tr>
         </table>
@@ -174,6 +179,7 @@
             //document.getElementById("submitButtonDiv").style.disabled;
 
         </script>
+
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9FCsoZWld-8JgJwwz6H4GvM-JtYBDSfY&callback=initMap"
         async defer></script>
 
@@ -197,33 +203,43 @@ mon();
 function mon(){
   gray();
   document.getElementById('mon').style.backgroundColor='black';
+  document.getElementById("dayOnTable").textContent = "Monday";
+  document.getElementById("monDesc").textContent = monAgenda;
   socket.emit('getDayRouteSocket',"Monday");
 }
 function tue(){
   gray();
   document.getElementById('tue').style.backgroundColor='black';
+  document.getElementById("dayOnTable").textContent = "Tuesday";
+  document.getElementById("monDesc").textContent = tueAgenda;
   socket.emit('getDayRouteSocket',"Tuesday");
 }
 function wed(){
   gray();
   document.getElementById('wed').style.backgroundColor='black';
+  document.getElementById("dayOnTable").textContent = "Wednesday";
+  document.getElementById("monDesc").textContent = wedAgenda;
   socket.emit('getDayRouteSocket',"Wednesday");
 }
 function thu(){
   gray();
   document.getElementById('thu').style.backgroundColor='black';
+  document.getElementById("dayOnTable").textContent = "Thursday";
+  document.getElementById("monDesc").textContent = thuAgenda;
   socket.emit('getDayRouteSocket',"Thursday");
 }
 function fri(){
   gray();
   document.getElementById('fri').style.backgroundColor='black';
+  document.getElementById("dayOnTable").textContent = "Friday";
+  document.getElementById("monDesc").textContent = friAgenda;
   socket.emit('getDayRouteSocket',"Friday");
 }
 
 document.getElementById("submitButtonBUTTON").disabled = true;  // initialize button to diabled
 document.getElementById("greenChecker").style.opacity = '0.0'; // initialize green check to 'hidden' state
 
-var input = document.querySelector('input');
+var input = document.getElementById('chatFileOpen');
 input.addEventListener('change', updateSubmitButton);  // looks for change in upload value of upload button
 
 function updateSubmitButton(){
@@ -320,40 +336,91 @@ socket.on("polyline",function(data){
 });
 
 socket.on("textSchedule",function(class_details){
+  // console.log(class_details);
+  // calls tableOrganizer function and passes 5 parameters. each param is an array of the respective day.
   console.log(class_details);
+  tableOrganizer(class_details["Monday"], class_details["Tuesday"], class_details["Wednesday"], class_details["Thursday"], class_details["Friday"]);
 });
 
 //script to put all classes under their respective day's table row.
 //5 arrays, traverses each array.
-function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){
+
+var monAgenda;
+var tueAgenda;
+var wedAgenda;
+var thuAgenda;
+var friAgenda;
+
+function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    // logic for parsing array for each day and putting in table
 
   table = document.getElementById("table");
-  var agenda;
-  var classElement;
+  monAgenda="";
+  tueAgenda="";
+  wedAgenda="";
+  thuAgenda="";
+  friAgenda="";
+
+
+  //var s = "monArray";
+  //
+
 
   for(i = 0; i < monArray.length; i++){
-    classElement = monArray[i];
-    String(classElement) + "<br>";
+    monAgenda = "- " + monAgenda + JSON.stringify(monArray[i].name)+" at "+JSON.stringify(monArray[i].acronym)+" ("+JSON.stringify(monArray[i].loc_name)+")"+" starting at "+JSON.stringify(monArray[i].startTime)+" and ending at "+JSON.stringify(monArray[i].endTime)+"<br>"+"<br>";
+
+    monAgenda = monAgenda.replace(/"/g, "");
+    //classElement = monArray[i];
+    //agenda = agenda + JSON.stringify(classElement) + "<br>";
   }
+
+  document.getElementById("monDesc").innerHTML = monAgenda;
+  document.getElementById("dayOnTable").textContent = "Monday";
+
+  //monAgenda = "";
 
   for(i = 0; i < tueArray.length; i++){
+    tueAgenda = "- " + tueAgenda + JSON.stringify(tueArray[i].name)+" at "+JSON.stringify(tueArray[i].acronym)+" ("+JSON.stringify(tueArray[i].loc_name)+")"+" starting at "+JSON.stringify(tueArray[i].startTime)+" and ending at "+JSON.stringify(tueArray[i].endTime)+"<br>"+"<br>";
 
+    tueAgenda = tueAgenda.replace(/"/g, "");
   }
+
+  //document.getElementById("tueDesc").textContent = tueAgenda;
+
+  //tueAgenda = "";
 
   for(i = 0; i < wedArray.length; i++){
+    wedAgenda = "- " + wedAgenda + JSON.stringify(wedArray[i].name)+" at "+JSON.stringify(wedArray[i].acronym)+" ("+JSON.stringify(wedArray[i].loc_name)+")"+" starting at "+JSON.stringify(wedArray[i].startTime)+" and ending at "+JSON.stringify(wedArray[i].endTime)+"<br>"+"<br>";
 
+    wedAgenda = wedAgenda.replace(/"/g, "");
   }
+
+  //document.getElementById("wedDesc").textContent = wedAgenda;
+
+  //wedAgenda = "";
 
   for(i = 0; i < thuArray.length; i++){
+    thuAgenda = "- " + thuAgenda + JSON.stringify(thuArray[i].name)+" at "+JSON.stringify(thuArray[i].acronym)+" ("+JSON.stringify(thuArray[i].loc_name)+")"+" starting at "+JSON.stringify(thuArray[i].startTime)+" and ending at "+JSON.stringify(thuArray[i].endTime)+"<br>"+"<br>";
 
+    thuAgenda = thuAgenda.replace(/"/g, "");
   }
+
+  //document.getElementById("thuDesc").textContent = thuAgenda;
+
+  //thuAgenda = "";
 
   for(i = 0; i < friArray.length; i++){
+    friAgenda = "- " + friAgenda + JSON.stringify(friArray[i].name)+" at "+JSON.stringify(friArray[i].acronym)+" ("+JSON.stringify(friArray[i].loc_name)+")"+" starting at "+JSON.stringify(friArray[i].startTime)+" and ending at "+JSON.stringify(friArray[i].endTime)+"<br>"+"<br>";
 
+    friAgenda = friAgenda.replace(/"/g, "");
   }
 
-}
+  //document.getElementById("friDesc").textContent = friAgenda;
 
+  //friAgenda = "";
+
+}
+var textInput = document.getElementById('addressSearch');
+var autocomplete = new google.maps.places.Autocomplete(textInput);
 
 </script>
 </html>
