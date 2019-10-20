@@ -65,7 +65,8 @@
       <!--<input type="text" id='addressSearch'class="form-control" placeholder="Address" aria-label="Address">-->
       <div id = "uploadAddress" style="width: 60%; padding-left: 0px">
         <center>
-          <!--<input type="text" id='addressSearch'class="form-control" placeholder="Address" aria-label="Address" style="float:left; width: 100%; float: left; margin-bottom: 2%;">-->
+          <input type="text" id='addressSearch'class="form-control" placeholder="Dorm address" aria-label="Dorm address" style="float:left; width: 100%; margin-bottom: 2%;">
+
         </center>
       </div>
       <div id = "uploadButtonDiv" style="width: 22%; padding-left: 0px" >                                    <!-- Upload button floated left -->
@@ -230,7 +231,7 @@ function fri(){
 document.getElementById("submitButtonBUTTON").disabled = true;  // initialize button to diabled
 document.getElementById("greenChecker").style.opacity = '0.0'; // initialize green check to 'hidden' state
 
-var input = document.querySelector('input');
+var input = document.getElementById('chatFileOpen');
 input.addEventListener('change', updateSubmitButton);  // looks for change in upload value of upload button
 
 function updateSubmitButton(){
@@ -300,9 +301,9 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
   var classElement;
 
   for(i = 0; i < monArray.length; i++){
-    agenda = agenda + JSON.stringify(monArray[i].name)+" at "+JSON.stringify(monArray[i].acronym)+" ("+JSON.stringify(monArray[i].loc_name)+")"+" starting at "+JSON.stringify(monArray[i].startTime)+" and ending at "+JSON.stringify(monArray[i].endTime)+"\n\n";
+    agenda = agenda + JSON.stringify(monArray[i].name)+" at "+JSON.stringify(monArray[i].acronym)+" ("+JSON.stringify(monArray[i].loc_name)+")"+" starting at "+JSON.stringify(monArray[i].startTime)+" and ending at "+JSON.stringify(monArray[i].endTime)+"\n";
 
-    agenda = agenda.replace(/"/g, "");
+    agenda = agenda.replace("\"", " ");
     //classElement = monArray[i];
     //agenda = agenda + JSON.stringify(classElement) + "<br>";
   }
@@ -310,9 +311,9 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
   document.getElementById("monDesc").textContent = agenda;
 
   for(i = 0; i < tueArray.length; i++){
-    agenda = agenda + JSON.stringify(tueArray[i].name)+" at "+JSON.stringify(tueArray[i].acronym)+" ("+JSON.stringify(tueArray[i].loc_name)+")"+" starting at "+JSON.stringify(tueArray[i].startTime)+" and ending at "+JSON.stringify(tueArray[i].endTime)+"\n\n";
+    agenda = agenda + JSON.stringify(tueArray[i].name)+" at "+JSON.stringify(tueArray[i].acronym)+" ("+JSON.stringify(tueArray[i].loc_name)+")"+" starting at "+JSON.stringify(tueArray[i].startTime)+" and ending at "+JSON.stringify(tueArray[i].endTime)+"\n";
 
-    agenda = agenda.replace(/"/g, "");
+    agenda = agenda.replace("\"", " ");
   }
 
   document.getElementById("tueDesc").textContent = agenda;
@@ -320,9 +321,9 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
   agenda = "";
 
   for(i = 0; i < wedArray.length; i++){
-    agenda = agenda + JSON.stringify(wedArray[i].name)+" at "+JSON.stringify(wedArray[i].acronym)+" ("+JSON.stringify(wedArray[i].loc_name)+")"+" starting at "+JSON.stringify(wedArray[i].startTime)+" and ending at "+JSON.stringify(wedArray[i].endTime)+"\n\n";
+    agenda = agenda + JSON.stringify(wedArray[i].name)+" at "+JSON.stringify(wedArray[i].acronym)+" ("+JSON.stringify(wedArray[i].loc_name)+")"+" starting at "+JSON.stringify(wedArray[i].startTime)+" and ending at "+JSON.stringify(wedArray[i].endTime)+"\n";
 
-    agenda = agenda.replace(/"/g, "");
+    agenda = agenda.replace("\"", " ");
   }
 
   document.getElementById("wedDesc").textContent = agenda;
@@ -330,9 +331,9 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
   agenda = "";
 
   for(i = 0; i < thuArray.length; i++){
-    agenda = agenda + JSON.stringify(thuArray[i].name)+" at "+JSON.stringify(thuArray[i].acronym)+" ("+JSON.stringify(thuArray[i].loc_name)+")"+" starting at "+JSON.stringify(thuArray[i].startTime)+" and ending at "+JSON.stringify(thuArray[i].endTime)+"\n\n";
+    agenda = agenda + JSON.stringify(thuArray[i].name)+" at "+JSON.stringify(thuArray[i].acronym)+" ("+JSON.stringify(thuArray[i].loc_name)+")"+" starting at "+JSON.stringify(thuArray[i].startTime)+" and ending at "+JSON.stringify(thuArray[i].endTime)+"\n";
 
-    agenda = agenda.replace(/"/g, "");
+    agenda = agenda.replace("\"", " ");
   }
 
   document.getElementById("thuDesc").textContent = agenda;
@@ -340,9 +341,9 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
   agenda = "";
 
   for(i = 0; i < friArray.length; i++){
-    agenda = agenda + JSON.stringify(friArray[i].name)+" at "+JSON.stringify(friArray[i].acronym)+" ("+JSON.stringify(friArray[i].loc_name)+")"+" starting at "+JSON.stringify(friArray[i].startTime)+" and ending at "+JSON.stringify(friArray[i].endTime)+"\n\n";
+    agenda = agenda + JSON.stringify(friArray[i].name)+" at "+JSON.stringify(friArray[i].acronym)+" ("+JSON.stringify(friArray[i].loc_name)+")"+" starting at "+JSON.stringify(friArray[i].startTime)+" and ending at "+JSON.stringify(friArray[i].endTime)+"\n";
 
-    agenda = agenda.replace(/"/g, "");
+    agenda = agenda.replace("\"", " ");
   }
 
   document.getElementById("friDesc").textContent = agenda;
