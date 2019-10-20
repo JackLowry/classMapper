@@ -65,7 +65,7 @@
       <div id = "uploadButtonDiv" style="width: 22%; padding-left: 0px" >                                    <!-- Upload button floated left -->
         <center>
           <div class='new_Btn' style="float:left; width: 100% float: left;">
-            <button class = "btn btn-primary border border-dark rounded" type ="button">Upload your schedule (.ics file) here!</button>
+            <button class = "btn btn-outline-dark" type ="button">Upload your schedule (.ics file) here!</button>
           </div>
           <input class="btn btn-primary" type='file' id='chatFileOpen' name='ics file' accept='.ics' style="display:none"> <!-- FILE INPUT -->
         </center>
@@ -139,11 +139,11 @@
 
     <div style='float:right;width:70%;height:90%'>
       <div id='tabs'style="height:5%">
-        <div id='mon'class='tab' >Monday</div>
-        <div class='tab' >Tuesday</div>
-        <div class='tab' >Wednesday</div>
-        <div class='tab' >Thursday</div>
-        <div class='tab' >Friday</div>
+        <div onclick='mon()' id='mon'class='tab' >Monday</div>
+        <div onclick='tue()' id='tue'class='tab' >Tuesday</div>
+        <div onclick='wed()' id='wed'class='tab' >Wednesday</div>
+        <div onclick='thu()' id='thu'class='tab' >Thursday</div>
+        <div onclick='fri()' id='fri'class='tab' >Friday</div>
 
 
 
@@ -173,10 +173,36 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 <script>
+function gray(){
 
-function mon(){
-  document.getElementById(mon).backgroundColor='black';
+  var children = document.getElementById('tabs').children;
+  for (var i = 0; i < children.length; i++) {
+  var child = children[i];
+  child.style.backgroundColor='gray';
+  // Do stuff
 }
+}
+function mon(){
+  gray();
+  document.getElementById('mon').style.backgroundColor='black';
+}
+function tue(){
+  gray();
+  document.getElementById('tue').style.backgroundColor='black';
+}
+function wed(){
+  gray();
+  document.getElementById('wed').style.backgroundColor='black';
+}
+function thu(){
+  gray();
+  document.getElementById('thu').style.backgroundColor='black';
+}
+function fri(){
+  gray();
+  document.getElementById('fri').style.backgroundColor='black';
+}
+
 document.getElementById("submitButtonBUTTON").disabled = true;  // initialize button to diabled
 document.getElementById("greenChecker").style.opacity = '0.0'; // initialize green check to 'hidden' state
 
