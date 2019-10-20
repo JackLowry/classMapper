@@ -62,11 +62,28 @@
     -->
   <div id='leftDiv' style='width:30%; float:left;'>    <!-- Master left side div -->
     <!--<input type="text" id='addressSearch'class="form-control" placeholder="Address" aria-label="Address">-->
-    <div id = "uploadAddress" style="width: 60%; padding-left: 0px">
-        <center>
-          <input type="text" id='addressSearch'class="form-control" placeholder="Dorm address" aria-label="Dorm address" style="float:left; width: 100%; margin-bottom: 2%;">
+    
+    <div id = "textUploadAndDropdown" style="width: 60%; padding-left: 0px">
 
-        </center>
+      <div class="btn-group" style = "float: left;">
+        
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Campus</button>
+        
+        <div class="dropdown-menu">
+          <a id = "buschOption" class="dropdown-item" href="#">Busch</a>
+          <a id = "collegeOption" class="dropdown-item" href="#">College Ave</a>
+          <a id = "livingstonOption" class="dropdown-item" href="#">Livingston</a>
+          <a id = "cookOption" class="dropdown-item" href="#">Cook/Douglass</a>
+        </div>
+      </div>
+
+      <div id = "uploadAddress" style="padding-left: 1px; float: right; width: 65%">
+          <center>
+            <input type="text" id='addressSearch'class="form-control" placeholder="Dorm address" aria-label="Dorm address" style="float:left; width: 100%; margin-bottom: 2%;">
+
+          </center>
+      </div>
+
     </div>
 
     <div id = "buttonDivMain" style="float: left; width: 100%; height: 75px" class="clearfix">  <!-- Fits both submit and upload buttons in one div, has border and clearfix  -->
