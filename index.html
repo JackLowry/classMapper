@@ -308,7 +308,7 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
 
 
   for(i = 0; i < monArray.length; i++){
-    monAgenda = monAgenda + JSON.stringify(monArray[i].name)+" at "+JSON.stringify(monArray[i].acronym)+" ("+JSON.stringify(monArray[i].loc_name)+")"+" starting at "+JSON.stringify(monArray[i].startTime)+" and ending at "+JSON.stringify(monArray[i].endTime)+"<br>";
+    monAgenda = "- " + monAgenda + JSON.stringify(monArray[i].name)+" at "+JSON.stringify(monArray[i].acronym)+" ("+JSON.stringify(monArray[i].loc_name)+")"+" starting at "+JSON.stringify(monArray[i].startTime)+" and ending at "+JSON.stringify(monArray[i].endTime)+"<br>"+"<br>";
 
     monAgenda = monAgenda.replace(/"/g, "");
     //classElement = monArray[i];
@@ -321,7 +321,7 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
   //monAgenda = "";
 
   for(i = 0; i < tueArray.length; i++){
-    tueAgenda = tueAgenda + JSON.stringify(tueArray[i].name)+" at "+JSON.stringify(tueArray[i].acronym)+" ("+JSON.stringify(tueArray[i].loc_name)+")"+" starting at "+JSON.stringify(tueArray[i].startTime)+" and ending at "+JSON.stringify(tueArray[i].endTime)+"\n\n";
+    tueAgenda = "- " + tueAgenda + JSON.stringify(tueArray[i].name)+" at "+JSON.stringify(tueArray[i].acronym)+" ("+JSON.stringify(tueArray[i].loc_name)+")"+" starting at "+JSON.stringify(tueArray[i].startTime)+" and ending at "+JSON.stringify(tueArray[i].endTime)+"<br>"+"<br>";
 
     tueAgenda = tueAgenda.replace(/"/g, "");
   }
@@ -331,7 +331,7 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
   //tueAgenda = "";
 
   for(i = 0; i < wedArray.length; i++){
-    wedAgenda = wedAgenda + JSON.stringify(wedArray[i].name)+" at "+JSON.stringify(wedArray[i].acronym)+" ("+JSON.stringify(wedArray[i].loc_name)+")"+" starting at "+JSON.stringify(wedArray[i].startTime)+" and ending at "+JSON.stringify(wedArray[i].endTime)+"\n\n";
+    wedAgenda = "- " + wedAgenda + JSON.stringify(wedArray[i].name)+" at "+JSON.stringify(wedArray[i].acronym)+" ("+JSON.stringify(wedArray[i].loc_name)+")"+" starting at "+JSON.stringify(wedArray[i].startTime)+" and ending at "+JSON.stringify(wedArray[i].endTime)+"<br>"+"<br>";
 
     wedAgenda = wedAgenda.replace(/"/g, "");
   }
@@ -341,7 +341,7 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
   //wedAgenda = "";
 
   for(i = 0; i < thuArray.length; i++){
-    thuAgenda = thuAgenda + JSON.stringify(thuArray[i].name)+" at "+JSON.stringify(thuArray[i].acronym)+" ("+JSON.stringify(thuArray[i].loc_name)+")"+" starting at "+JSON.stringify(thuArray[i].startTime)+" and ending at "+JSON.stringify(thuArray[i].endTime)+"\n\n";
+    thuAgenda = "- " + thuAgenda + JSON.stringify(thuArray[i].name)+" at "+JSON.stringify(thuArray[i].acronym)+" ("+JSON.stringify(thuArray[i].loc_name)+")"+" starting at "+JSON.stringify(thuArray[i].startTime)+" and ending at "+JSON.stringify(thuArray[i].endTime)+"<br>"+"<br>";
 
     thuAgenda = thuAgenda.replace(/"/g, "");
   }
@@ -351,7 +351,7 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    //
   //thuAgenda = "";
 
   for(i = 0; i < friArray.length; i++){
-    friAgenda = friAgenda + JSON.stringify(friArray[i].name)+" at "+JSON.stringify(friArray[i].acronym)+" ("+JSON.stringify(friArray[i].loc_name)+")"+" starting at "+JSON.stringify(friArray[i].startTime)+" and ending at "+JSON.stringify(friArray[i].endTime)+"\n\n";
+    friAgenda = "- " + friAgenda + JSON.stringify(friArray[i].name)+" at "+JSON.stringify(friArray[i].acronym)+" ("+JSON.stringify(friArray[i].loc_name)+")"+" starting at "+JSON.stringify(friArray[i].startTime)+" and ending at "+JSON.stringify(friArray[i].endTime)+"<br>"+"<br>";
 
     friAgenda = friAgenda.replace(/"/g, "");
   }
