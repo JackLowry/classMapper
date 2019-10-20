@@ -166,16 +166,16 @@ for day in schedule:
     schedule[day].insert(0, dorm_class)
     schedule[day].append(dorm_class)
 
-    schedule_dict[day].insert(0, {"message":"Leave your dorm at " + dorm_class.name + "<hr>"})
+    schedule_dict[day].insert(0, {"message":"Leave your dorm at " + dorm_class.name + "<br><br>"})
 
     for c in schedule[day]:
         schedule_dict[day].append(c.get_dict())
 
-    schedule_dict[day].append({"message":"Come back to your dorm at " + dorm_class.name + "<hr>"})
+    schedule_dict[day].append({"message":"Come back to your dorm at " + dorm_class.name + "<br><br>"})
 
 
 for day in schedule:
-    schedule_dict_count = 1
+    schedule_dict_count = 2
     schedule[day][0].find_position()
     write_file.write(f"{day}\n")
     for i in range(1,len(schedule[day])):
@@ -184,7 +184,9 @@ for day in schedule:
         class2.find_position()
 
 
-        sys.stderr.write(f"campuses: {class1.location.campus}, {class2.location.campus}\n")
+        sys.stderr.write(f"dict_schedule: {schedule_dict}\n")
+        sys.stderr.write(str(class1.location.campus != class2.location.campus) + "\n")
+        sys.stderr.write(f"{schedule_dict_count}\n")
         if(class1.location.campus != class2.location.campus):
             start_min_dist = sys.maxsize
             start_min_index = 0
@@ -221,8 +223,8 @@ for day in schedule:
 
             acronym_dict = {"BUS":"Busch", "C/D":"Cook Douglass", "CAC":"College Ave:", "LIV":"Livingston"}
             sys.stderr.write(class2.location.campus + "\n")
-            message_str =  "Get on the bus at the " + start_bus_loc.name + " heading towards " + acronym_dict[class2.location.campus]    + "<hr>"
-            message_str += "Get off the bus at the " + end_bus_loc.name + "<hr>"
+            message_str =  "Get on the bus at the " + start_bus_loc.name + " heading towards " + acronym_dict[class2.location.campus]    + "<br><br>"
+            message_str += "Get off the bus at the " + end_bus_loc.name + "<br><br>"
 
             schedule_dict[day].insert(schedule_dict_count, {"message":message_str})
 
@@ -252,7 +254,7 @@ for day in schedule:
             calls = [api_call1, api_call2, api_call3]
             print(calls)
 
-            for c in calls:class2.location.campus
+            for c in calls:
                 response = requests.get(c)
                 output = json.dumps(response.json())
                 write_file.write(f"{output}\n")
@@ -273,7 +275,7 @@ for day in schedule:
             response = requests.get(api_call)
             output = response.json()
             write_file.write(f"{json.dumps(output)}\n")
-        schedule_dict_count += 1
+            schedule_dict_count += 1
 
 print(json.dumps(schedule_dict))
 
