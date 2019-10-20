@@ -35,6 +35,7 @@ client.on('connection', function(socket){
 
              class_details = lines[0]
              console.log("class_details: " + class_details + "\n")
+             socket.emit("textSchedule",class_details);
 
              for(i = 1; i < lines.length; i++) {
                if(lines[i] in schedule) {
@@ -75,8 +76,8 @@ client.on('connection', function(socket){
             socket.emit("polyline",{line:points, destinations:destinations});
             }
 
-            //getting text of schedule for the table
-            
+
+
 
            })
         });
