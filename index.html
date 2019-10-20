@@ -187,24 +187,27 @@ function gray(){
 function mon(){
   gray();
   document.getElementById('mon').style.backgroundColor='black';
-  let monVar="Monday";
-  socket.emit('getDayRouteSocket',monVar);
+  socket.emit('getDayRouteSocket',"Monday");
 }
 function tue(){
   gray();
   document.getElementById('tue').style.backgroundColor='black';
+  socket.emit('getDayRouteSocket',"Tuesday");
 }
 function wed(){
   gray();
   document.getElementById('wed').style.backgroundColor='black';
+  socket.emit('getDayRouteSocket',"Wednesday");
 }
 function thu(){
   gray();
   document.getElementById('thu').style.backgroundColor='black';
+  socket.emit('getDayRouteSocket',"Thursday");
 }
 function fri(){
   gray();
   document.getElementById('fri').style.backgroundColor='black';
+  socket.emit('getDayRouteSocket',"Friday");
 }
 
 document.getElementById("submitButtonBUTTON").disabled = true;  // initialize button to diabled
@@ -231,6 +234,8 @@ function upload(){
 }
 
 socket.on("polyline",function(data){
+  var line = [];
+  
   let line1 = new google.maps.Polyline({
     path: data.line,
     strokeColor: '#FF0000',
