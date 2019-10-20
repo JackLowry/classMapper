@@ -278,12 +278,14 @@ socket.on("polyline",function(data){
 });
 
 socket.on("textSchedule",function(class_details){
-  console.log(class_details);
+  // console.log(class_details);
+  // calls tableOrganizer function and passes 5 parameters. each param is an array of the respective day.
+  tableOrganizer(class_details["Monday"], class_details["Tuesday"], class_details["Wednesday"], class_details["Thursday"], class_details["Friday"]);
 });
 
 //script to put all classes under their respective day's table row.
 //5 arrays, traverses each array.
-function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){
+function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    // logic for parsing array for each day and putting in table
 
   table = document.getElementById("table");
   var agenda;
@@ -301,28 +303,28 @@ function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){
     agenda = agenda + String(classElement) + "<br>";
   }
 
-  document.getElementById("monDesc").textContent = agenda;
+  document.getElementById("tueDesc").textContent = agenda;
 
   for(i = 0; i < wedArray.length; i++){
     classElement = wedArray[i];
     agenda = agenda + String(classElement) + "<br>";
   }
 
-  document.getElementById("monDesc").textContent = agenda;
+  document.getElementById("wedDesc").textContent = agenda;
 
   for(i = 0; i < thuArray.length; i++){
     classElement = thuArray[i];
     agenda = agenda + String(classElement) + "<br>";
   }
 
-  document.getElementById("monDesc").textContent = agenda;
+  document.getElementById("thuDesc").textContent = agenda;
 
   for(i = 0; i < friArray.length; i++){
     classElement = friArray[i];
     agenda = agenda + String(classElement) + "<br>";
   }
 
-  document.getElementById("monDesc").textContent = agenda;
+  document.getElementById("friDesc").textContent = agenda;
 
 }
 
