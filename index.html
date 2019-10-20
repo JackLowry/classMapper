@@ -374,15 +374,17 @@ function updateTable(arr) {
   for(i = 0; i < arr.length; i++){
     if(arr[i]["message"]){
       agenda += JSON.stringify(arr[i]["message"])
+      agenda = agenda.replace(/\"/g, "");
+      agenda = agenda.replace(/ Bus Stop Rutgers/g, " stop.")
     }
     else if(!arr[i].acronym) {
       continue;
     }
     else {
-      agenda += JSON.stringify(arr[i].name)+" at "+JSON.stringify(arr[i].acronym)+" ("+JSON.stringify(arr[i].loc_name)+")"+" starting at "+JSON.stringify(arr[i].startTime)+" and ending at "+JSON.stringify(arr[i].endTime)+"<br><br>";
+      agenda += JSON.stringify(arr[i].name)+" at "+JSON.stringify(arr[i].acronym)+" ("+JSON.stringify(arr[i].loc_name)+")"+" starting at "+JSON.stringify(arr[i].startTime)+" and ending at "+JSON.stringify(arr[i].endTime)+".<br><br>";
 
       agenda = agenda.replace(/\"/g, "");
-      agenda = agenda.replace(/ Bus Stop Rutgers/g, " stop.")
+      agenda = agenda.replace(/Rutgers/g, "")
     }
     //classElement = monArray[i];
     //agenda = agenda + JSON.stringify(classElement) + "<br>";
