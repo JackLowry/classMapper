@@ -33,11 +33,13 @@ client.on('connection', function(socket){
 
              lines = data.toString().split("\n")
 
-             class_details = JSON.parse(lines[0])
-             console.log("class_details: " + class_details + "\n")
+             class_details = JSON.parse(lines[lines.length-1])
              socket.emit("textSchedule",class_details);
 
              for(i = 1; i < lines.length; i++) {
+               if(lines[i] == "SCHEDULE_DONE") {
+                 break
+               }
                if(lines[i] in schedule) {
                  let day = lines[i];
                  while(!(lines[i+1] in schedule) && (i+1 < lines.length) && lines[i+1]){
@@ -47,9 +49,10 @@ client.on('connection', function(socket){
                  console.log("" + day + " length: " + schedule[day].length)
                }
              }
+             console.log("class_details: " + class_details + "\n")
            fs.unlink('tmp/' + uuid + '_response')
 
-           console.log(schedule)
+           //console.log(schedule)
            getDayRoute("Monday");
            socket.on('getDayRouteSocket',function(day){
              getDayRoute(day);
@@ -72,7 +75,7 @@ client.on('connection', function(socket){
                 route = JSON.parse(schedule[day][i])["routes"][0]
                 routeLine = route["overview_polyline"]["points"]
                 destinations.push({"location":route["legs"][0]["end_location"], "address":route["legs"][0]["end_address"]})
-                //console.log("dest_stuff: " + JSON.stringify(destinations[destinations.length-1]) + " day: " + day + " item: " + i + "\n")
+                console.log("dest_stuff: " + JSON.stringify(destinations[destinations.length-1]) + " day: " + day + " item: " + i + "\n")
                 decodedLine = routeLine.replace(/\"/g, "")
                 decodedLine = decodePolyline(decodedLine)
                 points = points.concat(decodedLine)

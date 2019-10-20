@@ -48,13 +48,13 @@ class Location:
     def __init__(self, position, name, acronym, campus = None):
         self.acronym = acronym
         self.position = position
+        if campus is not None:
+            self.campus = campus
         if name is None:
             self.name = buildings[acronym.split('-')[0]]["name"]
             self.campus = buildings[acronym.split('-')[0]]["campus"]
         else:
             self.name = name
-        if not campus is None:
-            self.campus = campus
 
 
     def __eq__(self, loc2):
@@ -114,6 +114,7 @@ home = cal.readline().strip()
 home_campus = cal.readline().strip()
 
 dorm_class = Class(None, None, None, home, Location(None, home, None, campus=home_campus))
+sys.stderr.write(f"dorm_campus: {dorm_class.location.campus}")
 dorm_class.find_position()
 while True:
     line = cal.readline().strip()
@@ -134,6 +135,7 @@ while True:
 
         date = datetime.date(int(year), int(month), int(day))
 
+        sys.stderr.write(location + "\n")
         loc = Location(None, None, location)
         newClass = Class(date, int(startTime), int(endTime), name, loc)
         weekday = newClass.date.strftime('%A')
@@ -164,14 +166,16 @@ for day in schedule:
     schedule[day].insert(0, dorm_class)
     schedule[day].append(dorm_class)
 
+    schedule_dict[day].insert(0, {"message":"Leave your dorm at " + dorm_class.name + "<br><br>"})
 
     for c in schedule[day]:
         schedule_dict[day].append(c.get_dict())
 
+    schedule_dict[day].append({"message":"Come back to your dorm at " + dorm_class.name + "<br><br>"})
 
-write_file.write(json.dumps(schedule_dict) + "\n")
 
 for day in schedule:
+    schedule_dict_count = 1
     schedule[day][0].find_position()
     write_file.write(f"{day}\n")
     for i in range(1,len(schedule[day])):
@@ -213,6 +217,13 @@ for day in schedule:
             end_bus_loc = Location(end_bus_loc["location"], end_bus_loc["name"] + " Bus Stop Rutgers", None)
             end_bus_tuple = (round(end_bus_loc.position["lat"],5), round(end_bus_loc.position["lng"],5))
 
+            #acronym_dict = {"BUS":"Busch", "C/D":"Cook Douglass", "CAC":"College Ave:", "LIV":"Livingston"}
+            sys.stderr.write(class2.location.campus + "\n")
+            message_str =  "Get on the bus at the " + start_bus_loc.name + " heading towards " + class2.location.campus + "<br><br>"
+            message_str += "Get off the bus at the " + end_bus_loc.name + "<br><br>"
+
+            schedule_dict[day].insert(schedule_dict_count, {"message":message_str})
+
             class1_address_str = class1.location.get_address_str()
             class2_address_str = class2.location.get_address_str()
             start_pos_address_str = f"{start_pos['lat']},{start_pos['lng']}"
@@ -244,6 +255,8 @@ for day in schedule:
                 output = json.dumps(response.json())
                 write_file.write(f"{output}\n")
 
+            schedule_dict_count += 1
+
 
         else:
             class1_address_str = class1.location.get_address_str()
@@ -258,5 +271,9 @@ for day in schedule:
             response = requests.get(api_call)
             output = response.json()
             write_file.write(f"{json.dumps(output)}\n")
+        schedule_dict_count += 1
 
+print(json.dumps(schedule_dict))
+
+write_file.write("SCHEDULE_DONE\n" + json.dumps(schedule_dict))
 #os.remove(cal_file)
