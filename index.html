@@ -10,11 +10,15 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="shortcut icon" href="https://www.rutgers.edu/sites/all/themes/uwide/favicon.ico" type="image/vnd.microsoft.icon">
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9FCsoZWld-8JgJwwz6H4GvM-JtYBDSfY&libraries=places"></script>
+  <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9FCsoZWld-8JgJwwz6H4GvM-JtYBDSfY&libraries=places"></script>-->
 
   <div style="font-weight: bold;">
     <title>
+<<<<<<< HEAD
       <h1><strong>Rutgers ClassMapper</strong></h1>
+=======
+      Rutgers ClassMapper
+>>>>>>> de09141fafb155809936d89ea8e06b2ec2c2c1dd
     </title>
   </div>
 
@@ -46,7 +50,7 @@
       <img src=ruShield2.png style='height: 100%; width: 100%; object-fit: contain;'/>
     </center>
   </div>
-  <h2 style="margin-left: 5%">
+  <h2 style="margin-left: 5%; margin-top: 0.5%">
     Rutgers ClassMapper
   </h2>
 </div>   <!-- Top div. -->
@@ -65,7 +69,7 @@
   <div id='leftDiv' style='width:30%; float:left;'>    <!-- Master left side div -->
     <!--<input type="text" id='addressSearch'class="form-control" placeholder="Address" aria-label="Address">-->
 
-    <div id = "textUploadAndDropdown" style="width: 90%; padding-left: 0px">
+    <div id = "textUploadAndDropdown" style="width: 100%; padding-left: 0px;padding-right:20px">
 
       <div class="btn-group" style = "float: left; width: 39%">
 
@@ -95,21 +99,24 @@
             <button class = "btn btn-dark" type ="button">Upload your schedule (.ics file) here!</button>
           </div>
           <input class="btn btn-primary" type='file' id='chatFileOpen' name='ics file' accept='.ics' style="display:none"> <!-- FILE INPUT -->
+          <a href="https://eas.rutgers.edu/?ht_kb=import-course-schedule-to-google-calendar" style="font-size: 10px; float: left;">Learn how to export your schedule</a>
 
       </div>
 
-      <div id="greenChecker" style='height: 25px; width: 25px; float: left; padding-left: 0; padding-right: 0; margin-left: 2.5%; margin-right: 2.5%'>    <!-- div that holds the green check mark -->
+      <div id="greenChecker" style='height: 25px; width: 25px; float: left; padding-left: 0; padding-right: 0; padding-top: 0px;padding-bottom: 0px;margin-left: 2.5%; margin-right: 2.5%'>    <!-- div that holds the green check mark -->
         <center>
           <img src=greenTick.png style='height: 100%; width: 100%; object-fit: contain;'/>
         </center>
       </div>
 
-      <div id = "submitButtonDiv" style="width: 22%; padding-right: 2%; padding-left: 0; float: left">               <!-- Submit button floated left to border upload button -->
+      <div id = "submitButtonDiv" style="width: 22%; padding-right: 20px; float: right">               <!-- Submit button floated left to border upload button -->
         <button id = "submitButtonBUTTON" onclick='upload()' type="button" class="btn btn-primary btn-success btn-block border border-dark rounded"> Submit! </button>  <!-- submit button. INITIALIZED IN JS BELOW -->
       </div>
 
     </div>
-
+    <div id = 'loading' style='display:none'>
+      <center><img src='loading.gif'></center>
+    </div>
     <div id='schedule' style='display:none;float:left;width:100%;padding-right:15px;padding-top:10px'>
 
         <style>
@@ -154,7 +161,7 @@
 </style>
 
 
-    <div style='float:right;width:70%;height:90%'>
+    <div style='float:right;width:70%;height:85%'>
       <div id='tabs'style="height:5%">
         <div onclick='mon()' id='mon'class='tab' >Monday</div>
         <div onclick='tue()' id='tue'class='tab' >Tuesday</div>
@@ -258,15 +265,20 @@ $('.new_Btn').on("click" , function () {
 line1 = null;
 
 function upload(){
-
+  document.getElementById('submitButtonBUTTON').disabled = true;
+  document.getElementById('loading').style.display='inline';
   var length = input.files.length;
   campus = document.getElementById('campusDropdown').value;
-  home_address = "Barr Hall, Piscataway, NJ\n{campus}"
+  addressInput=document.getElementById('addressSearch').value;
+  home_address = addressInput+"\n"+campus //TODO fix this
   input.files.item(0).text().then(text => socket.emit('upload',{file:text, home:home_address}));
+
 }
 
 socket.on("polyline",function(data){
   initMap();
+  document.getElementById('submitButtonBUTTON').disabled = false;
+  document.getElementById('loading').style.display='none';
   line1 = new google.maps.Polyline({
     path: data.line,
     strokeColor: '#FF0000',
@@ -384,6 +396,7 @@ function updateTable(arr) {
 }
 
 
+<<<<<<< HEAD
 // function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    // logic for parsing array for each day and putting in table
 //
 //   table = document.getElementById("table");
@@ -456,6 +469,11 @@ function updateTable(arr) {
 // }
 var textInput = document.getElementById('addressSearch');
 var autocomplete = new google.maps.places.Autocomplete(textInput);
+=======
+}
+/*var textInput = document.getElementById('addressSearch');
+var autocomplete = new google.maps.places.Autocomplete(textInput);*/
+>>>>>>> de09141fafb155809936d89ea8e06b2ec2c2c1dd
 
 </script>
 </html>
