@@ -113,28 +113,8 @@
 
           </tr>
           <tr>
-            <td>Monday</td>
+            <td id = "dayOnTable">Monday</td>
             <td id = "monDesc">Nothing!</td>
-
-          </tr>
-          <tr>
-            <td>Tuesday</td>
-            <td id = "tueDesc">Nothing!</td>
-
-          </tr>
-          <tr>
-            <td>Wednesday</td>
-            <td id = "wedDesc">Nothing!</td>
-
-          </tr>
-          <tr>
-            <td>Thursday</td>
-            <td id = "thuDesc">Nothing!</td>
-
-          </tr>
-          <tr>
-            <td>Friday</td>
-            <td id = "friDesc">Nothing!</td>
 
           </tr>
         </table>
@@ -205,26 +185,36 @@ mon();
 function mon(){
   gray();
   document.getElementById('mon').style.backgroundColor='black';
+  document.getElementById("dayOnTable").textContent = "Monday";
+  document.getElementById("monDesc").textContent = monAgenda;
   socket.emit('getDayRouteSocket',"Monday");
 }
 function tue(){
   gray();
   document.getElementById('tue').style.backgroundColor='black';
+  document.getElementById("dayOnTable").textContent = "Tuesday";
+  document.getElementById("monDesc").textContent = tueAgenda;
   socket.emit('getDayRouteSocket',"Tuesday");
 }
 function wed(){
   gray();
   document.getElementById('wed').style.backgroundColor='black';
+  document.getElementById("dayOnTable").textContent = "Wednesday";
+  document.getElementById("monDesc").textContent = wedAgenda;
   socket.emit('getDayRouteSocket',"Wednesday");
 }
 function thu(){
   gray();
   document.getElementById('thu').style.backgroundColor='black';
+  document.getElementById("dayOnTable").textContent = "Thursday";
+  document.getElementById("monDesc").textContent = thuAgenda;
   socket.emit('getDayRouteSocket',"Thursday");
 }
 function fri(){
   gray();
   document.getElementById('fri').style.backgroundColor='black';
+  document.getElementById("dayOnTable").textContent = "Friday";
+  document.getElementById("monDesc").textContent = friAgenda;
   socket.emit('getDayRouteSocket',"Friday");
 }
 
@@ -294,61 +284,78 @@ socket.on("textSchedule",function(class_details){
 
 //script to put all classes under their respective day's table row.
 //5 arrays, traverses each array.
+
+var monAgenda;
+var tueAgenda;
+var wedAgenda;
+var thuAgenda;
+var friAgenda;
+
 function tableOrganizer(monArray, tueArray, wedArray, thuArray, friArray){    // logic for parsing array for each day and putting in table
 
   table = document.getElementById("table");
-  var agenda="";
-  var classElement;
+  monAgenda="";
+  tueAgenda="";
+  wedAgenda="";
+  thuAgenda="";
+  friAgenda="";
+
+
+  //var s = "monArray";
+  //
+
 
   for(i = 0; i < monArray.length; i++){
-    agenda = agenda + JSON.stringify(monArray[i].name)+" at "+JSON.stringify(monArray[i].acronym)+" ("+JSON.stringify(monArray[i].loc_name)+")"+" starting at "+JSON.stringify(monArray[i].startTime)+" and ending at "+JSON.stringify(monArray[i].endTime)+"\n";
+    monAgenda = monAgenda + JSON.stringify(monArray[i].name)+" at "+JSON.stringify(monArray[i].acronym)+" ("+JSON.stringify(monArray[i].loc_name)+")"+" starting at "+JSON.stringify(monArray[i].startTime)+" and ending at "+JSON.stringify(monArray[i].endTime)+"\n\n";
 
-    agenda = agenda.replace("\"", " ");
+    monAgenda = monAgenda.replace(/"/g, "");
     //classElement = monArray[i];
     //agenda = agenda + JSON.stringify(classElement) + "<br>";
   }
 
-  document.getElementById("monDesc").textContent = agenda;
+  //document.getElementById("monDesc").textContent = monAgenda;
+
+  //monAgenda = "";
 
   for(i = 0; i < tueArray.length; i++){
-    agenda = agenda + JSON.stringify(tueArray[i].name)+" at "+JSON.stringify(tueArray[i].acronym)+" ("+JSON.stringify(tueArray[i].loc_name)+")"+" starting at "+JSON.stringify(tueArray[i].startTime)+" and ending at "+JSON.stringify(tueArray[i].endTime)+"\n";
+    tueAgenda = tueAgenda + JSON.stringify(tueArray[i].name)+" at "+JSON.stringify(tueArray[i].acronym)+" ("+JSON.stringify(tueArray[i].loc_name)+")"+" starting at "+JSON.stringify(tueArray[i].startTime)+" and ending at "+JSON.stringify(tueArray[i].endTime)+"\n\n";
 
-    agenda = agenda.replace("\"", " ");
+    tueAgenda = tueAgenda.replace(/"/g, "");
   }
 
-  document.getElementById("tueDesc").textContent = agenda;
+  //document.getElementById("tueDesc").textContent = tueAgenda;
 
-  agenda = "";
+  //tueAgenda = "";
 
   for(i = 0; i < wedArray.length; i++){
-    agenda = agenda + JSON.stringify(wedArray[i].name)+" at "+JSON.stringify(wedArray[i].acronym)+" ("+JSON.stringify(wedArray[i].loc_name)+")"+" starting at "+JSON.stringify(wedArray[i].startTime)+" and ending at "+JSON.stringify(wedArray[i].endTime)+"\n";
+    wedAgenda = wedAgenda + JSON.stringify(wedArray[i].name)+" at "+JSON.stringify(wedArray[i].acronym)+" ("+JSON.stringify(wedArray[i].loc_name)+")"+" starting at "+JSON.stringify(wedArray[i].startTime)+" and ending at "+JSON.stringify(wedArray[i].endTime)+"\n\n";
 
-    agenda = agenda.replace("\"", " ");
+    wedAgenda = wedAgenda.replace(/"/g, "");
   }
 
-  document.getElementById("wedDesc").textContent = agenda;
+  //document.getElementById("wedDesc").textContent = wedAgenda;
 
-  agenda = "";
+  //wedAgenda = "";
 
   for(i = 0; i < thuArray.length; i++){
-    agenda = agenda + JSON.stringify(thuArray[i].name)+" at "+JSON.stringify(thuArray[i].acronym)+" ("+JSON.stringify(thuArray[i].loc_name)+")"+" starting at "+JSON.stringify(thuArray[i].startTime)+" and ending at "+JSON.stringify(thuArray[i].endTime)+"\n";
+    thuAgenda = thuAgenda + JSON.stringify(thuArray[i].name)+" at "+JSON.stringify(thuArray[i].acronym)+" ("+JSON.stringify(thuArray[i].loc_name)+")"+" starting at "+JSON.stringify(thuArray[i].startTime)+" and ending at "+JSON.stringify(thuArray[i].endTime)+"\n\n";
 
-    agenda = agenda.replace("\"", " ");
+    thuAgenda = thuAgenda.replace(/"/g, "");
   }
 
-  document.getElementById("thuDesc").textContent = agenda;
+  //document.getElementById("thuDesc").textContent = thuAgenda;
 
-  agenda = "";
+  //thuAgenda = "";
 
   for(i = 0; i < friArray.length; i++){
-    agenda = agenda + JSON.stringify(friArray[i].name)+" at "+JSON.stringify(friArray[i].acronym)+" ("+JSON.stringify(friArray[i].loc_name)+")"+" starting at "+JSON.stringify(friArray[i].startTime)+" and ending at "+JSON.stringify(friArray[i].endTime)+"\n";
+    friAgenda = friAgenda + JSON.stringify(friArray[i].name)+" at "+JSON.stringify(friArray[i].acronym)+" ("+JSON.stringify(friArray[i].loc_name)+")"+" starting at "+JSON.stringify(friArray[i].startTime)+" and ending at "+JSON.stringify(friArray[i].endTime)+"\n\n";
 
-    agenda = agenda.replace("\"", " ");
+    friAgenda = friAgenda.replace(/"/g, "");
   }
 
-  document.getElementById("friDesc").textContent = agenda;
+  //document.getElementById("friDesc").textContent = friAgenda;
 
-  agenda = "";
+  //friAgenda = "";
 
 }
 //var input = document.getElementById('addressSearch');
