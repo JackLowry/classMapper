@@ -20,7 +20,7 @@
     "decode-google-map-polyline": "^1.0.1",
     "fs": "0.0.1-security",
     "js": "^0.1.0",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.5.0",
     "uuid": "^3.3.3"
   }
 }
